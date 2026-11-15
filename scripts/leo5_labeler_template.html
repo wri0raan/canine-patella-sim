@@ -1,0 +1,163 @@
+<title>레오 관절 표시</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a working tool. Sticky instruction bar on top, the photo stage below (scrolls inside its own frame when zoomed), chips for the eight points. */
+:root {
+  --bg: #f3f4f1; --surface: #ffffff; --fg: #1d2420; --muted: #5d6862; --line: #d5dad4;
+  --near: #d9480f; --far: #1971c2; --body: #2b8a3e; --accent: #1d2420; --accent-fg: #f3f4f1;
+  --font: "IBM Plex Sans KR", "Malgun Gothic", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #151a17; --surface: #1e2420; --fg: #e8ece8; --muted: #9aa59e; --line: #333b36;
+  --near: #ff8a4c; --far: #6db3f2; --body: #5fd07a; --accent: #e8ece8; --accent-fg: #151a17; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #151a17; --surface: #1e2420; --fg: #e8ece8; --muted: #9aa59e; --line: #333b36;
+  --near: #ff8a4c; --far: #6db3f2; --body: #5fd07a; --accent: #e8ece8; --accent-fg: #151a17; color-scheme: dark; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 15px; line-height: 1.5;
+  padding-block: 0 24px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 12px; }
+h1 { font-size: 18px; margin: 0; font-weight: 600; text-wrap: balance; }
+.prog { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s; }
+.ask { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 4px; }
+.ask b { font-size: 17px; font-weight: 600; }
+.ask span { color: var(--muted); font-size: 13.5px; }
+.tag { display: inline-block; font-size: 12px; padding: 1px 7px; border-radius: 4px; color: #fff; margin-right: 6px; vertical-align: 2px; }
+.tag.near { background: var(--near); } .tag.far { background: var(--far); } .tag.body { background: var(--body); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 13px; padding: 5px 9px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 6px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.chip .d { width: 9px; height: 9px; border-radius: 50%; border: 2px solid currentColor; }
+.chip.near .d { color: var(--near); } .chip.far .d { color: var(--far); } .chip.body .d { color: var(--body); }
+.chip.set .d { background: currentColor; } .chip.skip { color: var(--muted); text-decoration: line-through; }
+.chip.cur { outline: 2px solid var(--accent); outline-offset: 1px; }
+.stage { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow: auto; max-height: 78vh; touch-action: pan-x pan-y pinch-zoom; }
+.canvas { position: relative; line-height: 0; cursor: crosshair; }
+.canvas img { width: 100%; display: block; user-select: none; -webkit-user-drag: none; }
+.pt { position: absolute; width: 0; height: 0; pointer-events: none; }
+.pt i { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid currentColor; box-shadow: 0 0 0 1px rgba(255,255,255,.85), inset 0 0 0 1px rgba(255,255,255,.85); }
+.pt i::after { content: ""; position: absolute; left: 6px; top: 6px; width: 2px; height: 2px; background: currentColor; }
+.pt em { position: absolute; left: 11px; top: -9px; font: 600 11px/1 var(--font); font-style: normal; color: #fff; padding: 2px 4px; border-radius: 3px; background: currentColor; white-space: nowrap; }
+.pt em span { color: #fff; }
+.pt.near { color: var(--near); } .pt.far { color: var(--far); } .pt.body { color: var(--body); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+button.b { font: inherit; font-size: 14px; padding: 8px 12px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 6px; cursor: pointer; }
+button.b.main { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 600; }
+button.b:disabled { opacity: .4; cursor: default; }
+button.b:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sp { flex: 1; }
+.note { font-size: 13px; color: var(--muted); }
+.strip { display: flex; gap: 4px; flex-wrap: wrap; }
+.strip button { font: 500 11px var(--mono); width: 30px; height: 26px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); border-radius: 4px; cursor: pointer; padding: 0; }
+.strip button.done { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); } .strip button.cur { outline: 2px solid var(--far); outline-offset: 1px; }
+textarea { width: 100%; min-height: 100px; font: 12px var(--mono); background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+</style>
+<div class="wrap">
+  <header><h1>레오 뒷다리 관절 표시</h1><span class="prog" id="prog">0 / 0 장 완료</span></header>
+  <div class="bar"><i id="barfill"></i></div>
+  <div class="ask" id="ask"></div>
+  <div class="chips" id="chips"></div>
+  <div class="stage" id="stage"><div class="canvas" id="canvas"><img id="img" alt="레오 뒷다리 확대 사진"></div></div>
+  <div class="row">
+    <button class="b" id="undo">되돌리기</button>
+    <button class="b" id="skip">안 보임 (건너뛰기)</button>
+    <span class="sp"></span>
+    <button class="b" id="z1">1×</button><button class="b" id="z2">2×</button><button class="b" id="z3">3×</button>
+  </div>
+  <div class="row">
+    <button class="b" id="prev">이전 사진</button>
+    <button class="b main" id="next">다음 사진</button>
+    <span class="sp"></span>
+    <button class="b" id="copy">결과 복사</button>
+  </div>
+  <div class="strip" id="strip" aria-label="사진 목록"></div>
+  <p class="note" id="status"></p>
+  <textarea id="fallback" hidden readonly aria-label="결과 JSON"></textarea>
+</div>
+<script>
+const FRAMES = __FRAMES__;
+const STEPS = [
+  { k: "tail", g: "body", name: "꼬리 시작점", hint: "꼬리가 등과 만나는 곳(꼬리 뿌리)" },
+  { k: "hip", g: "body", name: "엉덩이 관절", hint: "넓적다리뼈 맨 위, 엉덩이에서 가장 볼록한 뼈 부위(대전자)" },
+  { k: "nstif", g: "near", name: "가까운 다리 무릎", hint: "넓적다리와 정강이가 꺾이는 관절, 무릎뼈가 있는 앞쪽" },
+  { k: "nhock", g: "near", name: "가까운 다리 뒤꿈치", hint: "뒤로 튀어나온 뒤꿈치뼈(비절의 뾰족한 곳)" },
+  { k: "npaw", g: "near", name: "가까운 다리 발", hint: "발 한가운데(바닥에 닿는 발가락 부분)" },
+  { k: "fstif", g: "far", name: "먼 다리 무릎", hint: "몸통에 더 가려진 쪽 다리의 무릎" },
+  { k: "fhock", g: "far", name: "먼 다리 뒤꿈치", hint: "먼 다리의 뒤꿈치뼈" },
+  { k: "fpaw", g: "far", name: "먼 다리 발", hint: "먼 다리의 발 한가운데" },
+];
+const GL = { near: "가까운 다리", far: "먼 다리", body: "몸" };
+const $ = (id) => document.getElementById(id);
+const state = {};            // id -> {pts:{k:[x,y]|null}, done:bool}  (x,y = crop-video px)
+let cur = 0, step = 0, zoom = 1, db = null, status = "";
+FRAMES.forEach((f) => { state[f.id] = { pts: {}, done: false }; });
+try { const s = JSON.parse(localStorage.getItem("leo5-labels") || "null"); if (s) for (const id in s) if (state[id]) state[id] = s[id]; } catch (e) {}
+
+function save(id) {
+  try { localStorage.setItem("leo5-labels", JSON.stringify(state)); } catch (e) {}
+  if (!db) return;
+  const doc = db.doc("labels/" + id), body = { clip: id.split("_")[0], frame: Number(id.split("_")[1]), pts: state[id].pts, done: state[id].done, t: Date.now() };
+  queue = queue.then(() => doc.set(body)).catch((e) => { setStatus("서버 저장에 실패했습니다(" + (e && e.code) + "). 이 기기에는 저장되어 있으니 끝난 뒤 '결과 복사'를 눌러 주세요."); });
+}
+let queue = Promise.resolve();
+function setStatus(t) { status = t; $("status").textContent = t; }
+
+function firstOpen(id) { const s = state[id]; for (let i = 0; i < STEPS.length; i++) if (!(STEPS[i].k in s.pts)) return i; return STEPS.length - 1; }
+function render() {
+  const f = FRAMES[cur], s = state[f.id], st = STEPS[step];
+  $("img").src = "data:image/jpeg;base64," + f.jpg_b64;
+  const done = FRAMES.filter((x) => state[x.id].done).length;
+  $("prog").textContent = done + " / " + FRAMES.length + " 장 완료 · 지금 " + (cur + 1) + "번째";
+  $("barfill").style.width = (100 * done / FRAMES.length) + "%";
+  $("ask").innerHTML = '<b><span class="tag ' + st.g + '">' + GL[st.g] + "</span>" + st.name + "</b><span>" + st.hint + ". 사진에서 그 자리를 탭하세요. 안 보이면 '안 보임'.</span>";
+  $("chips").innerHTML = ""; STEPS.forEach((x, i) => {
+    const b = document.createElement("button"); const v = s.pts[x.k];
+    b.className = "chip " + x.g + (v ? " set" : "") + (x.k in s.pts && !v ? " skip" : "") + (i === step ? " cur" : ""); b.innerHTML = '<span class="d"></span>' + x.name.replace("가까운 다리 ", "가까운 ").replace("먼 다리 ", "먼 ");
+    b.onclick = () => { step = i; render(); }; $("chips").appendChild(b); });
+  document.querySelectorAll(".pt").forEach((n) => n.remove());
+  STEPS.forEach((x) => { const v = s.pts[x.k]; if (!v) return; const d = document.createElement("div"); d.className = "pt " + x.g;
+    d.style.left = (100 * (v[0] - f.x0) * f.z / f.w) + "%"; d.style.top = (100 * (v[1] - f.y0) * f.z / f.w) + "%";
+    d.innerHTML = "<i></i><em>" + x.name.replace("가까운 다리 ", "").replace("먼 다리 ", "") + "</em>"; $("canvas").appendChild(d); });
+  $("canvas").style.width = (zoom * 100) + "%";
+  [1, 2, 3].forEach((z) => $("z" + z).classList.toggle("main", z === zoom));
+  $("prev").disabled = cur === 0; $("next").textContent = cur === FRAMES.length - 1 ? "마지막 사진 완료" : "다음 사진";
+  $("strip").innerHTML = ""; FRAMES.forEach((x, i) => { const b = document.createElement("button"); b.textContent = (x.clip === "a" ? "" : "") + (i + 1); b.className = (state[x.id].done ? "done " : "") + (i === cur ? "cur" : ""); b.onclick = () => go(i); $("strip").appendChild(b); });
+}
+function go(i) { cur = Math.max(0, Math.min(FRAMES.length - 1, i)); step = firstOpen(FRAMES[cur].id); if (Object.keys(state[FRAMES[cur].id].pts).length === STEPS.length) step = 0; render(); $("stage").scrollTo(0, 0); }
+function place(e) {
+  const f = FRAMES[cur], s = state[f.id], r = $("img").getBoundingClientRect();
+  const X = (e.clientX - r.left) / r.width * f.w, Y = (e.clientY - r.top) / r.height * f.w;
+  s.pts[STEPS[step].k] = [Math.round((f.x0 + X / f.z) * 10) / 10, Math.round((f.y0 + Y / f.z) * 10) / 10];
+  advance();
+}
+function advance() {
+  const f = FRAMES[cur], s = state[f.id]; let n = step + 1; while (n < STEPS.length && STEPS[n].k in s.pts) n++;
+  if (n >= STEPS.length) { s.done = Object.keys(s.pts).length === STEPS.length; step = Math.min(step, STEPS.length - 1); if (s.done) { save(f.id); render(); setStatus("이 사진 완료. '다음 사진'을 누르세요."); return; } n = STEPS.findIndex((x) => !(x.k in s.pts)); }
+  step = n; save(f.id); render();
+}
+$("canvas").addEventListener("click", place);
+$("skip").onclick = () => { state[FRAMES[cur].id].pts[STEPS[step].k] = null; advance(); };
+$("undo").onclick = () => { const s = state[FRAMES[cur].id]; const k = STEPS[step].k; if (k in s.pts) delete s.pts[k]; else { for (let i = STEPS.length - 1; i >= 0; i--) if (STEPS[i].k in s.pts) { delete s.pts[STEPS[i].k]; step = i; break; } } s.done = false; save(FRAMES[cur].id); render(); };
+$("next").onclick = () => { const f = FRAMES[cur], s = state[f.id]; if (Object.keys(s.pts).length < STEPS.length) { setStatus("아직 표시하지 않은 점이 있습니다. 못 찾으면 '안 보임'을 눌러 주세요."); return; } s.done = true; save(f.id); if (cur < FRAMES.length - 1) go(cur + 1); else { render(); setStatus("모두 끝났습니다. 채팅에 '다 했어'라고 알려 주세요."); } };
+$("prev").onclick = () => go(cur - 1);
+[1, 2, 3].forEach((z) => { $("z" + z).onclick = () => { zoom = z; render(); }; });
+$("copy").onclick = async () => {
+  const out = FRAMES.map((f) => ({ id: f.id, clip: f.clip, frame: f.frame, done: state[f.id].done, pts: state[f.id].pts })), txt = JSON.stringify(out);
+  try { await navigator.clipboard.writeText(txt); setStatus("복사했습니다. 채팅에 붙여넣어 주세요."); } catch (e) { $("fallback").hidden = false; $("fallback").value = txt; $("fallback").select(); setStatus("아래 글자를 모두 복사해서 채팅에 붙여넣어 주세요."); }
+};
+window.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") go(cur + 1); if (e.key === "ArrowLeft") go(cur - 1); if (e.key === "z" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); $("undo").click(); } });
+go(FRAMES.findIndex((f) => !state[f.id].done) < 0 ? 0 : FRAMES.findIndex((f) => !state[f.id].done));
+
+(async () => {
+  try { db = await (window.claude && window.claude.use ? window.claude.use("db") : null); } catch (e) { db = null; }
+  if (!db) { setStatus("서버 저장이 연결되지 않았습니다. 이 기기에만 저장됩니다. 끝나면 '결과 복사'를 눌러 채팅에 붙여넣어 주세요."); return; }
+  const timer = setTimeout(() => setStatus("저장소 응답이 늦습니다. 계속 표시해도 이 기기에는 저장됩니다."), 10000);
+  db.collection("labels").onSnapshot((snap) => {
+    clearTimeout(timer);
+    snap.docs.forEach((d) => { const v = d.data(); if (v && state[d.id] && !state[d.id].done && v.done) state[d.id] = { pts: v.pts || {}, done: !!v.done }; });
+    render();
+  }, () => { clearTimeout(timer); });
+})();
+</script>

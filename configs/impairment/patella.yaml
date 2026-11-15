@@ -1,0 +1,36 @@
+modes:
+  mechanical: prom_ext   # knee extension limit = passive max extension (goniometer)
+  functional: arom_ext   # knee extension limit = max extension actually reached at trot (capped by the passive limit: ext = min(prom_ext, this))
+grades:
+  0:
+    measured: true
+    prom_ext: 162.9      # stifle passive max extension
+    prom_flex: 44.7      # stifle passive max flexion
+    arom_ext: 167.1      # stifle MEA at trot (> passive 162.9: different protocols, ~4 deg)
+    knee_arom: 48.93     # AROM = MEA - MFA (median, IQR 45.26-55.66)
+    knee_mfa: 121.8      # stifle max flexion angle at trot
+    hip_arom: 19.02
+    hip_mea: 142.1
+    hip_mfa: 122.9
+    hock_arom: 47.59
+    hock_mea: 157.4
+    hock_mfa: 105.8
+  1: {measured: false, prom_ext: 160.0, prom_flex: 45.0, arom_ext: 164.4, knee_arom: 42.2, hip_arom: 20.0, hock_arom: 52.0}
+  2: {measured: false, prom_ext: 155.0, prom_flex: 45.0, arom_ext: 144.9, knee_arom: 35.5, hip_arom: 25.0, hock_arom: 65.0}
+  3:
+    measured: true
+    prom_ext: 149.7
+    prom_flex: 45.83
+    arom_ext: 125.1      # stifle MEA at trot (SD 1.43)
+    knee_arom: 28.77     # SD 2.29
+    knee_mfa: 96.88      # stifle MFA at trot (SD 1.31): the crouch, flexes MORE than controls
+    hip_arom: 35.53      # SD 10.67
+    hip_mea: 143.9
+    hip_mfa: 108.4
+    hock_arom: 78.38     # SD 2.20
+    hock_mea: 168.7
+    hock_mfa: 89.18
+  4: {measured: false, prom_ext: 140.0, prom_flex: 48.0, arom_ext: 115.0, knee_arom: 22.1, hip_arom: 40.0, hock_arom: 85.0}  # hip/hock were "40+", "85+"
+affected_legs: [LH, RH]   # bilateral first (keeps the trot symmetric); unilateral [LH] is a second experiment
+study_dog_mass_kg: 3.12
+study_speed_ms: 1.11

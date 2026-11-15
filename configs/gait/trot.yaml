@@ -1,0 +1,71 @@
+sim:
+  timestep: 0.002    # 0.005 chatters once servos are stiff (measured in scripts, see docs/log.md)
+  integrator: implicitfast
+servo:
+  kp_scale: 4.0      # kp [Nm/rad] = kp_scale * original actuator gear; standing sag 2.4 deg, no jitter at dt=0.002
+  kd_s: 0.10         # kd = kd_s * kp
+  digit_kp: 40.0     # Nm/rad for toe/finger joints (torque cap = original gear 2 Nm): the weak default let the paw collapse
+  digit_kd: 0.3
+head:                # closed-loop neck posture, so the dog carries its head forward-up instead of looking at the floor
+  target_elev_deg: 50.0   # neck elevation (C_7 -> C_1 direction above horizontal); standing dog ~45-55
+  ctrl0: -0.04            # tendon command that gives that posture when standing (0 = head down, -0.2 = howling)
+  gain: 0.002             # per degree of error
+  min: -0.08
+  max: 0.0
+tail:                # closed-loop tail carriage (Leo carries the tail raised over the back)
+  target_rho_deg: 40.0   # angle of Ca_1->Ca_21 above the horizontal, pointing backward
+  ctrl0: 0.06
+  gain: 0.002
+  min: -0.02
+  max: 0.25
+gait:
+  eval_duration: 6.0     # s per rollout
+  warmup: 2.0            # s excluded from statistics
+  ramp_in: 1.0           # s, amplitude ramp from standing to full gait
+  target_speed: 1.2     # m/s, compromise: equal-Froude scaling of the Chihuahua trot gives 1.35 (see docs), but the model has no active spine so its stride length caps the reachable speed
+  freq_bounds: [1.4, 3.6]    # stride frequency Hz
+  amp_bounds: [0.0, 0.9]     # rad
+  bias_bounds: [-0.5, 0.5]   # rad, offset from the standing pose
+  abd_bounds: [-0.1, 0.45]   # rad, static outward offset of hip / scapula abduction (+ = outward)
+  harmonics: 2          # second harmonic per joint: lets a joint fold quickly and extend slowly (non-sinusoidal waveform)
+  amp2_max: 0.5
+  fall: {min_torso_z: 0.20, min_up: 0.5}
+cost:
+  w_speed: 10.0       # ((v - v*)/v*)^2
+  w_energy: 0.003     # mean sum tau^2 [Nm^2] on driven joints (kept small: first priority is to walk at all)
+  w_lateral: 1.0      # |y drift| per second
+  w_yaw: 1.0          # |yaw| rad over the evaluation window
+  w_tilt: 4.0         # std of roll/pitch proxy (1 - up)
+  w_fall: 6.0         # 1 - t_fall/T when the dog falls
+  fall_const: 8.0
+  duty_target: 0.55   # stance fraction of every foot in a trot at this speed (dogs: ~0.5-0.6)
+  w_duty: 3.0
+  hind_load_range: [0.33, 0.45]   # fraction of vertical ground force carried by the hind legs (dogs ~0.4)
+  w_load: 6.0
+  min_height: 0.34    # m, torso height should stay near the standing height (0.40)
+  w_height: 4.0
+  calibrate: false
+  w_calib: 3.0
+  calib_scale: 6.0    # deg (tighter: clinical-first baseline)
+  calib_targets: {stifle_mea: 167.1, stifle_mfa: 121.8, hock_mea: 157.4, hock_mfa: 105.8, hip_rom: 19.0}
+  calib_hip_joint: true   # hip JOINT swing (femur about the pelvis) toward the control hip ROM; the iliac-crest based clinical hip angle is only reported
+  calib_hip: false    # hip angle definitions differ (iliac crest vs our trunk axis) and the model has no active spine: report hip ROM as validation only
+  stride_target: 1.4
+  w_stride: 3.0
+  height_ref: 0.45    # m, model shoulder height
+  w_meta: 1.0
+  meta_min: 80.0
+  meta_scale: 15.0
+  w_wobble: 1.0
+  wobble_ok: 0.6
+  w_shape: 1.0
+  calibrate_fore: true
+  w_fore: 1.5
+  fore_scale: 12.0
+  fore_targets: {shoulder_rom: 27.0, elbow_rom: 53.0, wrist_rom: 80.0}
+optim:
+  popsize: 48
+  sigma0: 0.25
+  max_gens: 200
+  workers: 12
+  seed: 1

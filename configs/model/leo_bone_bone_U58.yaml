@@ -1,0 +1,28 @@
+hind: 0.55
+hindfoot: 0.55
+fore: 0.59
+digit: 0.70
+neck: 0.62       # neck length (user: 0.55 slightly short; 0.72 overshoots by ~4 cm in the photo overlay)
+head: 0.85       # overall head size only (uniform), proportions unchanged
+skull_x: 1.0     # head anisotropy is now done on the mesh itself (toy_skull warp), not by scaling
+skull_y: 1.0
+skull_z: 1.0
+toy_skull: 0       # OFF (user: the reshaped skull looked wrong; size scaling only, keep the original proportions)
+toy_muzzle_k: 0.42
+toy_dome: 0.08
+scapula: 0.77    # longer shoulder blade so that the withers reach 35 cm while the shoulder joint stays at 25 cm
+tail: 0.425      # tail length 85% of the previous 0.50 (user)
+trunk_x: 0.62     # back length ~30 cm, shoulder->hip 33.8 cm: hip joint matches the user photo overlay (user: the 45 cm was measured wrongly)
+trunk_yz: 0.60
+chest_yz: 0.50    # chest depth/width geometry (Leo's visible bulk is fur)
+chest_y_skin: 1.35  # skin-only lateral widening of the chest (top view looked too narrow); collision geoms unchanged
+chest_len: 0.82   # chest ellipsoid length: ends at the shoulder joint, not in the neck
+chest_dx: -0.015  # m, chest shifted back
+neck_r: 0.50      # neck girth (fur)
+mass: 7.0
+spine_k: 2.5       # lumbar spring multiplier (leoA/leoB1a arched the back by +40-48 deg while walking with the similarity-scaled springs)
+overrides:
+  gait: {fall: {min_torso_z: 0.11, min_up: 0.5}, freq_bounds: [1.8, 4.2], target_speed: 0.85, abd_bounds: [-0.05, 0.10]}   # abduction <= ~6 deg (user: legs/arms splayed, single-track trot)
+  cost: {min_height: 0.19, height_ref: 0.35, ref_file: data/ref/leo_ref.npz, carpus_rom_min: 35.0, stride_target: 1.0, w_track: 4.0, track_tol: 0.01, clear_min: 0.04}   # Leo trot 0.85 m/s, 2.4 Hz: stride 0.35 m = 1.0 x height
+  head: {target_elev_deg: 38.0}   # photo overlay: skull sat ~5 cm above Leo's head with the original 50 deg neck elevation
+hind_upper: 0.58

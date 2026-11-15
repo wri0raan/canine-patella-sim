@@ -1,0 +1,49 @@
+clip,truth,true_change,which,call,pmax,reliable,ok
+leo2@15s,abnormal,-10.1,strongest,abnormal,0.9716428427465835,True,True
+leo2@15s,abnormal,-8.6,median,abnormal,0.9516325105810818,True,True
+leo2@15s,abnormal,-7.1,weakest,abnormal,0.8780686339459178,True,True
+leo2@15s,severe,-22.4,strongest,severe,0.996199216278398,True,True
+leo2@15s,severe,-20.6,median,severe,0.9841744857891203,True,True
+leo2@15s,severe,-17.2,weakest,severe,0.8042172375067338,True,True
+leo2@51s,abnormal,-10.1,strongest,abnormal,0.7796577878157466,False,True
+leo2@51s,abnormal,-8.6,median,abnormal,0.9397377254748103,True,True
+leo2@51s,abnormal,-7.1,weakest,abnormal,0.9846350576941754,True,True
+leo2@51s,severe,-22.4,strongest,severe,0.9999820143286346,True,True
+leo2@51s,severe,-20.6,median,severe,0.9998929442802168,True,True
+leo2@51s,severe,-17.2,weakest,severe,0.9968977941595185,True,True
+leo2@64s,abnormal,-10.1,strongest,normal,0.6031514924951097,False,False
+leo2@64s,abnormal,-8.6,median,normal,0.8692676533409087,True,False
+leo2@64s,abnormal,-7.1,weakest,normal,0.9629347823951833,True,False
+leo2@64s,severe,-22.4,strongest,severe,0.6291183649229829,False,True
+leo2@64s,severe,-20.6,median,abnormal,0.830293257379346,True,False
+leo2@64s,severe,-17.2,weakest,abnormal,0.9959591931184246,True,False
+leo2@71s,abnormal,-10.1,strongest,abnormal,0.9684809649962464,True,True
+leo2@71s,abnormal,-8.6,median,abnormal,0.9683200165259226,True,True
+leo2@71s,abnormal,-7.1,weakest,abnormal,0.925901285886474,True,True
+leo2@71s,severe,-22.4,strongest,severe,0.9980362237447524,True,True
+leo2@71s,severe,-20.6,median,severe,0.9916499315088795,True,True
+leo2@71s,severe,-17.2,weakest,severe,0.8840116739499736,True,True
+leo3 n1,abnormal,-10.1,strongest,abnormal,0.9325369279376953,True,True
+leo3 n1,abnormal,-8.6,median,abnormal,0.9755457929489022,True,True
+leo3 n1,abnormal,-7.1,weakest,abnormal,0.9760539522073866,True,True
+leo3 n1,severe,-22.4,strongest,severe,0.999618358268339,True,True
+leo3 n1,severe,-20.6,median,severe,0.9982238497168617,True,True
+leo3 n1,severe,-17.2,weakest,severe,0.9684555965568815,True,True
+leo3 n2,abnormal,-10.1,strongest,abnormal,0.7858125368043044,False,True
+leo3 n2,abnormal,-8.6,median,abnormal,0.5102055612765574,False,True
+leo3 n2,abnormal,-7.1,weakest,normal,0.7593285342150334,False,False
+leo3 n2,severe,-22.4,strongest,severe,0.9190533654015413,True,True
+leo3 n2,severe,-20.6,median,severe,0.6660399760534651,False,True
+leo3 n2,severe,-17.2,weakest,abnormal,0.9302930781129525,True,False
+leo3 n4,abnormal,-10.1,strongest,abnormal,0.9616516906943139,True,True
+leo3 n4,abnormal,-8.6,median,abnormal,0.9742141969404475,True,True
+leo3 n4,abnormal,-7.1,weakest,abnormal,0.9483113440762657,True,True
+leo3 n4,severe,-22.4,strongest,severe,0.9987887635306278,True,True
+leo3 n4,severe,-20.6,median,severe,0.9947364299363312,True,True
+leo3 n4,severe,-17.2,weakest,severe,0.9212088674765053,True,True
+leo3 n5,abnormal,-10.1,strongest,abnormal,0.9716561516731169,True,True
+leo3 n5,abnormal,-8.6,median,abnormal,0.9558501680265364,True,True
+leo3 n5,abnormal,-7.1,weakest,abnormal,0.8892426303871078,True,True
+leo3 n5,severe,-22.4,strongest,severe,0.9966553514199304,True,True
+leo3 n5,severe,-20.6,median,severe,0.9860294063871092,True,True
+leo3 n5,severe,-17.2,weakest,severe,0.822898796824196,True,True

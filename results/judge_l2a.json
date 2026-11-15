@@ -1,0 +1,26 @@
+{
+ "tag": "l2a",
+ "mode": "absolute (no baseline)",
+ "stifle_mean": 115.28918855395219,
+ "legs": [
+  114.49601950703142,
+  116.08235760087297
+ ],
+ "window_s": 2.525,
+ "class_means": {
+  "normal": 124.04215137292613,
+  "abnormal": 115.82286947551387,
+  "severe": 103.20766395534494
+ },
+ "sd": 6.14680054334801,
+ "probability": {
+  "normal": 0.2412368441233649,
+  "abnormal": 0.6624064418369193,
+  "severe": 0.09635671403971571
+ },
+ "call": "abnormal",
+ "reliable": false,
+ "notes": [
+  "absolute mode cannot reliably separate normal from grade 2 (8 deg apart vs ~6 deg sd); give --baseline healthy clips of this dog"
+ ]
+}

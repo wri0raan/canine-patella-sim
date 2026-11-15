@@ -1,0 +1,24 @@
+{
+ "tag": "a+b",
+ "mode": "hybrid (baseline of 2 healthy clips: 120.1 deg)",
+ "stifle_mean": 119.51083120790759,
+ "legs": [
+  117.80013298807197,
+  121.22152942774318
+ ],
+ "window_s": 4.949999999999999,
+ "class_means": {
+  "normal": 120.10856814319162,
+  "abnormal": 111.88928624577937,
+  "severe": 99.27408072561043
+ },
+ "sd": 7.484281629217149,
+ "probability": {
+  "normal": 0.616051811960162,
+  "abnormal": 0.3679738713587201,
+  "severe": 0.015974316681117873
+ },
+ "call": "normal",
+ "reliable": false,
+ "notes": []
+}

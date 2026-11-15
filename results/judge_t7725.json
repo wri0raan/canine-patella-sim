@@ -1,0 +1,24 @@
+{
+ "tag": "t7725",
+ "mode": "hybrid (baseline of 4 healthy clips: 119.9 deg)",
+ "stifle_mean": 119.92192127153484,
+ "legs": [
+  119.09651312769435,
+  120.74732941537533
+ ],
+ "window_s": 3.675,
+ "class_means": {
+  "normal": 119.8797870252807,
+  "abnormal": 113.60767730991108,
+  "severe": 97.9359004849482
+ },
+ "sd": 5.755380817397207,
+ "probability": {
+  "normal": 0.6457829729999514,
+  "abnormal": 0.35377923836474706,
+  "severe": 0.000437788635301612
+ },
+ "call": "normal",
+ "reliable": false,
+ "notes": []
+}

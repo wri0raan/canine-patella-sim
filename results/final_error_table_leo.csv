@@ -1,0 +1,43 @@
+setting,grade,metric,clinical,sim_mean,sim_sd,error
+"H1 energy-only, functional limit",0,stifle_min,121.8,124.15282037767513,0.0,2.3528203776751297
+"H1 energy-only, functional limit",0,stifle_max,167.1,159.729290884583,0.0,-7.370709115416986
+"H1 energy-only, functional limit",0,stifle_rom,48.93,35.57647050690788,0.0,-13.353529493092118
+"H1 energy-only, functional limit",0,hock_min,105.8,107.90069635360912,0.0,2.1006963536091234
+"H1 energy-only, functional limit",0,hock_max,157.4,151.18748163297528,0.0,-6.212518367024728
+"H1 energy-only, functional limit",0,hock_rom,47.59,43.28678527936617,0.0,-4.303214720633832
+"H1 energy-only, functional limit",0,hip_rom,19.02,21.850941064359915,0.0,2.8309410643599158
+"H1 energy-only, functional limit",3,stifle_min,96.88,113.4974687678125,3.225717831223685,16.61746876781251
+"H1 energy-only, functional limit",3,stifle_max,125.1,122.70867494518042,0.3458282396627812,-2.391325054819575
+"H1 energy-only, functional limit",3,stifle_rom,28.77,9.211206177367922,2.970017145527171,-19.558793822632076
+"H1 energy-only, functional limit",3,hock_min,89.18,114.9338317059972,2.414724491223258,25.7538317059972
+"H1 energy-only, functional limit",3,hock_max,168.7,147.4825736021395,2.4117958779422257,-21.217426397860493
+"H1 energy-only, functional limit",3,hock_rom,78.38,32.54874189614231,3.7266993899989607,-45.831258103857685
+"H1 energy-only, functional limit",3,hip_rom,35.53,25.51255660965828,4.348507195106273,-10.017443390341722
+"H1 energy-only, mechanical limit",0,stifle_min,121.8,124.15282037767513,0.0,2.3528203776751297
+"H1 energy-only, mechanical limit",0,stifle_max,167.1,159.729290884583,0.0,-7.370709115416986
+"H1 energy-only, mechanical limit",0,stifle_rom,48.93,35.57647050690788,0.0,-13.353529493092118
+"H1 energy-only, mechanical limit",0,hock_min,105.8,107.90069635360912,0.0,2.1006963536091234
+"H1 energy-only, mechanical limit",0,hock_max,157.4,151.18748163297528,0.0,-6.212518367024728
+"H1 energy-only, mechanical limit",0,hock_rom,47.59,43.28678527936617,0.0,-4.303214720633832
+"H1 energy-only, mechanical limit",0,hip_rom,19.02,21.850941064359915,0.0,2.8309410643599158
+"H1 energy-only, mechanical limit",3,stifle_min,96.88,136.2141863123143,4.487485875243509,39.3341863123143
+"H1 energy-only, mechanical limit",3,stifle_max,125.1,147.5397654507141,1.4593164717784928,22.439765450714106
+"H1 energy-only, mechanical limit",3,stifle_rom,28.77,11.325579138399782,3.1163370684291745,-17.444420861600218
+"H1 energy-only, mechanical limit",3,hock_min,89.18,114.98260479756112,2.758819246651058,25.802604797561116
+"H1 energy-only, mechanical limit",3,hock_max,168.7,153.61739585629462,1.142717896470058,-15.082604143705368
+"H1 energy-only, mechanical limit",3,hock_rom,78.38,38.63479105873352,1.6656234374263463,-39.745208941266476
+"H1 energy-only, mechanical limit",3,hip_rom,35.53,26.993276883958686,2.2396007569376786,-8.536723116041316
+"H2 keep healthy excursions, functional limit",0,stifle_min,121.8,124.15282037767513,0.0,2.3528203776751297
+"H2 keep healthy excursions, functional limit",0,stifle_max,167.1,159.729290884583,0.0,-7.370709115416986
+"H2 keep healthy excursions, functional limit",0,stifle_rom,48.93,35.57647050690788,0.0,-13.353529493092118
+"H2 keep healthy excursions, functional limit",0,hock_min,105.8,107.90069635360912,0.0,2.1006963536091234
+"H2 keep healthy excursions, functional limit",0,hock_max,157.4,151.18748163297528,0.0,-6.212518367024728
+"H2 keep healthy excursions, functional limit",0,hock_rom,47.59,43.28678527936617,0.0,-4.303214720633832
+"H2 keep healthy excursions, functional limit",0,hip_rom,19.02,21.850941064359915,0.0,2.8309410643599158
+"H2 keep healthy excursions, functional limit",3,stifle_min,96.88,100.74039187120077,7.194278604190384,3.8603918712007754
+"H2 keep healthy excursions, functional limit",3,stifle_max,125.1,122.03450345030357,0.5371150958651465,-3.0654965496964195
+"H2 keep healthy excursions, functional limit",3,stifle_rom,28.77,21.294111579102807,6.65747765000677,-7.475888420897192
+"H2 keep healthy excursions, functional limit",3,hock_min,89.18,109.18510604172629,5.79474169805666,20.00510604172628
+"H2 keep healthy excursions, functional limit",3,hock_max,168.7,145.8357917468562,2.850179227672684,-22.8642082531438
+"H2 keep healthy excursions, functional limit",3,hock_rom,78.38,36.65068570512988,2.969395202217149,-41.729314294870115
+"H2 keep healthy excursions, functional limit",3,hip_rom,35.53,28.07976064689994,1.439410817246955,-7.450239353100063

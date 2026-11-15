@@ -1,0 +1,2 @@
+start,end,dur,facing,speed_ms,speed_bl,stride_period,stride_hz,n_strides,paw_conf,body_px,lag_LF_RH,lag_RF_LH,lag_LF_RF,lag_LF_LH,lag_RF_RH,gait
+3.2083333333333335,4.316666666666666,1.1083333333333334,left,1.4590977879573328,3.2424395287940726,0.25,4.0,2,0.7375385442508886,396.27472895754244,nan,nan,nan,-0.42844098914712486,nan,mixed

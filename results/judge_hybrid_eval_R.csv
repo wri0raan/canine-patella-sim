@@ -1,0 +1,46 @@
+scheme,clip,truth,x,call,ok,pmax,reliable
+absolute (sim only),a,normal,116.33595255022777,abnormal,False,0.7048853906903442,False
+absolute (sim only),a,abnormal,108.97890570284343,severe,False,0.774660033870596,False
+absolute (sim only),a,severe,93.42178764111819,severe,True,0.9995510329633203,True
+absolute (sim only),b,normal,122.68570986558738,abnormal,False,0.5390777672189465,False
+absolute (sim only),b,abnormal,115.32866301820304,abnormal,True,0.6825135270767386,False
+absolute (sim only),b,severe,99.7715449564778,severe,True,0.9938251991555517,True
+absolute (sim only),l2a,normal,115.28918855395219,abnormal,False,0.6812071661322096,False
+absolute (sim only),l2a,abnormal,107.93214170656785,severe,False,0.8425003093632998,True
+absolute (sim only),l2a,severe,92.3750236448426,severe,True,0.9997086149759471,True
+absolute (sim only),l2b,normal,125.20829713135547,normal,True,0.5783917065060631,False
+absolute (sim only),l2b,abnormal,117.85125028397113,abnormal,True,0.7035361960522851,False
+absolute (sim only),l2b,severe,102.29413222224588,severe,True,0.98260614528377,True
+absolute (sim only),t7725,normal,119.92192127153484,abnormal,False,0.6531868925243379,False
+absolute (sim only),t7725,abnormal,112.5648744241505,abnormal,True,0.5141205719745929,False
+absolute (sim only),t7725,severe,97.00775636242525,severe,True,0.998025663102781,True
+hybrid leave-one-clip-out (4 baseline clips),a,normal,116.33595255022777,abnormal,False,0.5519942345270608,False
+hybrid leave-one-clip-out (4 baseline clips),a,abnormal,108.97890570284343,abnormal,True,0.8019915459660357,True
+hybrid leave-one-clip-out (4 baseline clips),a,severe,93.42178764111819,severe,True,0.9992216410941458,True
+hybrid leave-one-clip-out (4 baseline clips),b,normal,122.68570986558738,normal,True,0.8602321920754654,True
+hybrid leave-one-clip-out (4 baseline clips),b,abnormal,115.32866301820304,abnormal,True,0.5108762788150337,False
+hybrid leave-one-clip-out (4 baseline clips),b,severe,99.7715449564778,severe,True,0.9067555096180747,True
+hybrid leave-one-clip-out (4 baseline clips),l2a,normal,115.28918855395219,abnormal,False,0.6525659887834055,False
+hybrid leave-one-clip-out (4 baseline clips),l2a,abnormal,107.93214170656785,abnormal,True,0.755365937307279,False
+hybrid leave-one-clip-out (4 baseline clips),l2a,severe,92.3750236448426,severe,True,0.9998444098652186,True
+hybrid leave-one-clip-out (4 baseline clips),l2b,normal,125.20829713135547,normal,True,0.9595413176481739,True
+hybrid leave-one-clip-out (4 baseline clips),l2b,abnormal,117.85125028397113,normal,False,0.7131704613226015,False
+hybrid leave-one-clip-out (4 baseline clips),l2b,severe,102.29413222224588,severe,True,0.670531371428673,False
+hybrid leave-one-clip-out (4 baseline clips),t7725,normal,119.92192127153484,normal,True,0.6954172755103544,False
+hybrid leave-one-clip-out (4 baseline clips),t7725,abnormal,112.5648744241505,abnormal,True,0.6796702981511386,False
+hybrid leave-one-clip-out (4 baseline clips),t7725,severe,97.00775636242525,severe,True,0.9739028468598188,True
+hybrid cross-session: baseline leo2 -> test leo4,a,normal,116.33595255022777,abnormal,False,0.4798280027015923,False
+hybrid cross-session: baseline leo2 -> test leo4,a,abnormal,108.97890570284343,abnormal,True,0.512994549958483,False
+hybrid cross-session: baseline leo2 -> test leo4,a,severe,93.42178764111819,severe,True,0.9030803262640604,True
+hybrid cross-session: baseline leo2 -> test leo4,b,normal,122.68570986558738,normal,True,0.6339104918714219,False
+hybrid cross-session: baseline leo2 -> test leo4,b,abnormal,115.32866301820304,abnormal,True,0.49532940766682626,False
+hybrid cross-session: baseline leo2 -> test leo4,b,severe,99.7715449564778,severe,True,0.7073258402004232,False
+hybrid cross-session: baseline leo2 -> test leo4,t7725,normal,119.92192127153484,normal,True,0.5662427439808061,False
+hybrid cross-session: baseline leo2 -> test leo4,t7725,abnormal,112.5648744241505,abnormal,True,0.5235596944789656,False
+hybrid cross-session: baseline leo2 -> test leo4,t7725,severe,97.00775636242525,severe,True,0.8138055813020789,True
+hybrid cross-session: baseline leo4 -> test leo2,l2a,normal,115.28918855395219,abnormal,False,0.5488178703620241,False
+hybrid cross-session: baseline leo4 -> test leo2,l2a,abnormal,107.93214170656785,abnormal,True,0.8201166558939232,True
+hybrid cross-session: baseline leo4 -> test leo2,l2a,severe,92.3750236448426,severe,True,0.9994202756730935,True
+hybrid cross-session: baseline leo4 -> test leo2,l2b,normal,125.20829713135547,normal,True,0.9360208671841104,True
+hybrid cross-session: baseline leo4 -> test leo2,l2b,abnormal,117.85125028397113,normal,False,0.6332648335875773,False
+hybrid cross-session: baseline leo4 -> test leo2,l2b,severe,102.29413222224588,severe,True,0.7930601427620158,False

@@ -1,0 +1,26 @@
+{
+ "tag": "t1",
+ "mode": "absolute (no baseline)",
+ "stifle_mean": 122.68570986558738,
+ "legs": [
+  119.83763963709666,
+  125.53378009407811
+ ],
+ "window_s": 2.425,
+ "class_means": {
+  "normal": 124.04215137292613,
+  "abnormal": 115.82286947551387,
+  "severe": 103.20766395534494
+ },
+ "sd": 6.14680054334801,
+ "probability": {
+  "normal": 0.6426057994669151,
+  "abnormal": 0.35304844263461693,
+  "severe": 0.00434575789846794
+ },
+ "call": "normal",
+ "reliable": false,
+ "notes": [
+  "absolute mode cannot reliably separate normal from grade 2 (8 deg apart vs ~6 deg sd); give --baseline healthy clips of this dog"
+ ]
+}

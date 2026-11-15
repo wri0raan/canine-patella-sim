@@ -1,0 +1,17 @@
+clip,truth,true_change,which,call,pmax,reliable,ok
+leo2@15s,abnormal,-5.6,trot 1.06 m/s,abnormal,0.7198412046070775,False,True
+leo2@15s,severe,-26.4,trot 1.06 m/s,severe,0.9998440061109634,True,True
+leo2@51s,abnormal,-5.6,trot 1.06 m/s,abnormal,0.991256870580844,True,True
+leo2@51s,severe,-26.4,trot 1.06 m/s,severe,0.9999996585476716,True,True
+leo2@64s,abnormal,-5.6,trot 1.06 m/s,normal,0.9890892642066038,True,False
+leo2@64s,severe,-26.4,trot 1.06 m/s,severe,0.9946802799054367,True,True
+leo2@71s,abnormal,-5.6,trot 1.06 m/s,abnormal,0.8137992478449488,True,True
+leo2@71s,severe,-26.4,trot 1.06 m/s,severe,0.9999222263465628,True,True
+leo3 n1,abnormal,-5.6,trot 1.06 m/s,abnormal,0.9385907274746633,True,True
+leo3 n1,severe,-26.4,trot 1.06 m/s,severe,0.9999875142123871,True,True
+leo3 n2,abnormal,-5.6,trot 1.06 m/s,normal,0.9063112298469395,True,False
+leo3 n2,severe,-26.4,trot 1.06 m/s,severe,0.9981569510494068,True,True
+leo3 n4,abnormal,-5.6,trot 1.06 m/s,abnormal,0.8643056133378467,True,True
+leo3 n4,severe,-26.4,trot 1.06 m/s,severe,0.9999540886772508,True,True
+leo3 n5,abnormal,-5.6,trot 1.06 m/s,abnormal,0.7404742356682809,False,True
+leo3 n5,severe,-26.4,trot 1.06 m/s,severe,0.9998633203697355,True,True

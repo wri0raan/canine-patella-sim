@@ -1,0 +1,27 @@
+{
+ "tag": "l2b",
+ "mode": "absolute (no baseline)",
+ "stifle_mean": 125.20829713135547,
+ "legs": [
+  118.18892072504208,
+  132.22767353766884
+ ],
+ "window_s": 2.45,
+ "class_means": {
+  "normal": 124.04215137292613,
+  "abnormal": 115.82286947551387,
+  "severe": 103.20766395534494
+ },
+ "sd": 6.14680054334801,
+ "probability": {
+  "normal": 0.7581195235104455,
+  "abnormal": 0.24060477262605479,
+  "severe": 0.0012757038634996867
+ },
+ "call": "normal",
+ "reliable": false,
+ "notes": [
+  "the two legs disagree by 14 deg (tracking uncertain)",
+  "absolute mode cannot reliably separate normal from grade 2 (8 deg apart vs ~6 deg sd); give --baseline healthy clips of this dog"
+ ]
+}

@@ -23,10 +23,14 @@ ap.add_argument("--w", type=int, default=640)
 ap.add_argument("--h", type=int, default=360)
 ap.add_argument("--sample_fps", type=int, default=60)
 ap.add_argument("--play_fps", type=int, default=30, help="playback fps; sample/play = slow-motion factor")
+ap.add_argument("--lang", default="ko"); ap.add_argument("--bone", action="store_true", help="draw the skeleton instead of the skin")
 a = ap.parse_args()
 font = ImageFont.truetype("C:/Windows/Fonts/malgunbd.ttf", 22)
 small = ImageFont.truetype("C:/Windows/Fonts/malgun.ttf", 17)
 imp = load_yaml("configs/impairment/patella.yaml")
+OPT = mujoco.MjvOption()
+if a.bone:
+    OPT.geomgroup[:] = [1, 1, 1, 0, 1, 1]; OPT.flags[mujoco.mjtVisFlag.mjVIS_SKIN] = 0
 
 
 def render_run(run):
@@ -57,7 +61,7 @@ def render_run(run):
         mujoco.mj_step(m, d)
         if t >= a.skip and i % every == 0:
             cam.lookat[:] = d.xpos[sim.torso] * np.array([1, 1, 0]) + np.array([0, 0, 0.25])
-            r.update_scene(d, camera=cam)
+            r.update_scene(d, camera=cam, scene_option=OPT)
             frames.append(r.render().copy())
     return frames
 
@@ -82,7 +86,7 @@ for i in range(n):
     rows.append(np.vstack([np.hstack(cells[r:r + a.cols]) for r in range(0, len(cells), a.cols)]))
 slow = a.sample_fps / a.play_fps
 for i in range(n):
-    im = Image.fromarray(rows[i]); ImageDraw.Draw(im).text((im.width - 150, im.height - 26), f"{1/slow:.1f}x 속도", font=small, fill=(255, 255, 0))
+    im = Image.fromarray(rows[i]); ImageDraw.Draw(im).text((im.width - 150, im.height - 26), f"{1/slow:.1f}x " + ("속도" if a.lang == "ko" else "speed"), font=small, fill=(255, 255, 0))
     rows[i] = np.array(im)
 imageio.mimsave(a.out, rows, fps=a.play_fps, macro_block_size=1)
 print("wrote", a.out, n, "frames")

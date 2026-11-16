@@ -9,6 +9,8 @@ from analysis.leo_judge_lib import constants, clip_stifle, posterior, lpv, unit,
 plt.rcParams["font.family"] = "Malgun Gothic"; plt.rcParams["axes.unicode_minus"] = False
 OUT = "results/figures/thesis"; os.makedirs(OUT, exist_ok=True); FF = imageio_ffmpeg.get_ffmpeg_exe()
 FT = lambda s: ImageFont.truetype("C:/Windows/Fonts/malgunbd.ttf", s)
+EN = os.environ.get("FIG_LANG") == "en"; T = lambda ko, en: en if EN else ko
+if EN: OUT = "docs/readme/en"; os.makedirs(OUT, exist_ok=True)
 want = set(sys.argv[1:]); on = lambda k: not want or k in want
 C = constants(runset="R3"); CR = C["c_rump"]
 
@@ -61,7 +63,7 @@ if on("F03"):
     L = {p.replace("\\", "/").split("/")[-1][:-5]: json.load(open(p))["pts"] for p in glob.glob("data/real/leo5/label/user/labels/*.json")}
     cent = json.load(open("data/real/leo5/label/centres.json")) if os.path.exists("data/real/leo5/label/centres.json") else {}
     pack = json.load(open("data/real/leo5/label/pack/frames.json")); meta = {p["id"]: p for p in pack}
-    ids = ["a_245", "a_335", "b_212", "b_332"]; names = {"tail": "꼬리 뿌리", "hip": "엉덩이", "nstif": "무릎", "nhock": "뒤꿈치", "npaw": "발", "fstif": "무릎", "fhock": "뒤꿈치", "fpaw": "발"}
+    ids = ["a_245", "a_335", "b_212", "b_332"]; names = {"tail": T("꼬리 뿌리", "tail base"), "hip": T("엉덩이", "rump"), "nstif": T("무릎", "stifle"), "nhock": T("뒤꿈치", "hock"), "npaw": T("발", "paw"), "fstif": T("무릎", "stifle"), "fhock": T("뒤꿈치", "hock"), "fpaw": T("발", "paw")}
     fig, axs = plt.subplots(1, 4, figsize=(15, 4.2))
     import base64, io
     for a_, i in zip(axs, ids):
@@ -70,7 +72,7 @@ if on("F03"):
             if not v: continue
             X, Y = (v[0] - m["x0"]) * m["z"], (v[1] - m["y0"]) * m["z"]; col = "#2ca02c" if k in ("tail", "hip") else ("#d62728" if k.startswith("n") else "#1f77b4")
             a_.plot(X, Y, "o", mfc="none", mec=col, ms=9, mew=2); a_.text(X + 8, Y - 8, names[k], color="white", fontsize=7.5, bbox=dict(fc=col, ec="none", pad=1))
-        a_.set_title(f"{'학습용 클립 a' if i[0] == 'a' else '시험용 클립 b'}, 프레임 {i[2:]}", fontsize=10)
+        a_.set_title(T(f"{'학습용 클립 a' if i[0] == 'a' else '시험용 클립 b'}, 프레임 {i[2:]}", f"{'calibration clip a' if i[0] == 'a' else 'test clip b'}, frame {i[2:]}"), fontsize=10)
     plt.tight_layout(); plt.savefig(f"{OUT}/F03_marks_examples.png", dpi=150); plt.close(); print("F03")
 
 if on("F04"):
@@ -119,12 +121,12 @@ if on("F07"):
     ax.set_ylim(80, 175); ax.set_ylabel("정상 걸음의 무릎 각도 평균 (도)"); ax.set_title("엉덩이 기준점의 정의를 맞추면 모델과 영상의 평균 무릎 각도가 가까워진다 (막대 선: 영상 다리·클립의 범위)"); ax.title.set_fontsize(10); plt.tight_layout(); plt.savefig(f"{OUT}/F07_rump_definition.png", dpi=150); plt.close(); print("F07")
 
 if on("F08"):
-    tags = ["a", "b", "l2a", "l2b", "t7725"]; lab = {"a": "검사 영상 1", "b": "검사 영상 2", "l2a": "검사 영상 3", "l2b": "검사 영상 4", "t7725": "검사 영상 5"}
+    tags = ["a", "b", "l2a", "l2b", "t7725"]; lab = {"a": T("검사 영상 1", "Test clip 1"), "b": T("검사 영상 2", "Test clip 2"), "l2a": T("검사 영상 3", "Test clip 3"), "l2b": T("검사 영상 4", "Test clip 4"), "t7725": T("검사 영상 5", "Test clip 5")}
     X = {t: clip_stifle(t, CR) for t in tags}; mus = {"정상": C["mu_normal"], "등급 2": C["mu_normal"] + C["d_abnormal"], "등급 3": C["mu_normal"] + C["d_severe"]}; sd = float(np.sqrt(4.5 ** 2 + C["sd_sim"] ** 2 + C["sd_c"] ** 2 + C["sd_tracker"] ** 2))
-    mus = dict(zip(["정상", "2기", "3기"], mus.values()))
+    mus = dict(zip([T("정상", "Normal"), T("2기", "Grade 2"), T("3기", "Grade 3")], mus.values()))
     fig, ax = plt.subplots(figsize=(6.4, 4.3))
-    for (k, m), col in zip(mus.items(), ("#2ca02c", "#ff7f0e", "#d62728")): ax.axhspan(m - sd, m + sd, color=col, alpha=0.15); ax.axhline(m, color=col, ls="--", lw=1.2); ax.text(4.45, m, f"{k} {m:.0f}도", va="center", fontsize=10, color=col, bbox=dict(fc="white", ec="none", alpha=0.85, pad=1.5))
+    for (k, m), col in zip(mus.items(), ("#2ca02c", "#ff7f0e", "#d62728")): ax.axhspan(m - sd, m + sd, color=col, alpha=0.15); ax.axhline(m, color=col, ls="--", lw=1.2); ax.text(4.45, m, T(f"{k} {m:.0f}도", f"{k} {m:.0f}°"), va="center", fontsize=10, color=col, bbox=dict(fc="white", ec="none", alpha=0.85, pad=1.5))
     for i, t in enumerate(tags):
         ax.plot([i, i], X[t][2], color="#999", lw=1); ax.plot(i, X[t][0], "ko", ms=8); ax.plot([i] * 2, X[t][2], "_", color="#555", ms=10)
-    ax.set_xticks(range(5)); ax.set_xticklabels([lab[t] for t in tags]); ax.set_xlim(-0.5, 5.7); ax.set_ylabel("구간 평균 무릎 각도 (도)", fontsize=11); ax.tick_params(labelsize=10)
+    ax.set_xticks(range(5)); ax.set_xticklabels([lab[t] for t in tags]); ax.set_xlim(-0.5, 5.7); ax.set_ylabel(T("구간 평균 무릎 각도 (도)", "Mean knee angle of clip (deg)"), fontsize=11); ax.tick_params(labelsize=10)
     plt.tight_layout(); plt.savefig(f"{OUT}/F27_judge_summary_ko.png", dpi=220); plt.close(); print("F08")

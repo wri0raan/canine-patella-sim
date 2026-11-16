@@ -6,9 +6,11 @@
 
 Undergraduate thesis · CUCG Lab, The Catholic University of Korea · 2026
 
-<img src="docs/readme/healthy_vs_grade3.gif" width="760" alt="Healthy gait vs. Grade III patellar luxation" />
-
-<sub>Left: healthy model fitted to Leo · Right: same body with a Grade III knee-extension limit</sub>
+<table>
+<tr><th align="center">한국어</th><th align="center">English</th></tr>
+<tr><td><img src="docs/readme/ko/healthy_vs_grade3.gif" width="380" /></td><td><img src="docs/readme/en/healthy_vs_grade3.gif" width="380" /></td></tr>
+<tr><td align="center"><sub>왼쪽: leo에 맞춘 정상 모델 · 오른쪽: 같은 몸에 3기 무릎 신전 한계를 건 모델 (최종 모델, 0.5배속)</sub></td><td align="center"><sub>Left: healthy model fitted to Leo · Right: same body with a Grade 3 knee-extension limit (final model, half speed)</sub></td></tr>
+</table>
 
 [Project page](https://wri0raan.github.io/JURAN/research/gait.html) · [Portfolio](https://wri0raan.github.io/JURAN/) · [Figures and videos for presenting](docs/PRESENTATION.md)
 
@@ -26,14 +28,15 @@ This project tests it in physics: build a dog model from video of a real dog, lo
 ## Pipeline
 
 <table>
-<tr>
-<td width="50%"><img src="docs/readme/keypoints.jpg" alt="Keypoints from video" /></td>
-<td width="50%"><img src="docs/readme/skin_skeleton.gif" alt="Skin and skeleton render" /></td>
-</tr>
-<tr>
-<td align="center"><sub>Keypoints from 4K 120 fps video (SuperAnimal)</sub></td>
-<td align="center"><sub>Fitted body, rendered with skin and skeleton</sub></td>
-</tr>
+<tr><th align="center">한국어</th><th align="center">English</th></tr>
+<tr><td><img src="docs/readme/ko/keypoints.jpg" width="440" /></td><td><img src="docs/readme/en/keypoints.jpg" width="440" /></td></tr>
+<tr><td align="center"><sub>직접 표시한 점의 예: 보정용 구간 a, 시험용 구간 b</sub></td><td align="center"><sub>Hand-marked points: calibration clip a, test clip b</sub></td></tr>
+</table>
+
+<table>
+<tr><th align="center">한국어</th><th align="center">English</th></tr>
+<tr><td><img src="docs/readme/ko/skin_skeleton.gif" width="440" /></td><td><img src="docs/readme/en/skin_skeleton.gif" width="440" /></td></tr>
+<tr><td align="center"><sub>피부와 뼈대 렌더링(최종 모델)</sub></td><td align="center"><sub>Skin and skeleton render (final model)</sub></td></tr>
 </table>
 
 **A. Video → healthy model**
@@ -51,14 +54,19 @@ This project tests it in physics: build a dog model from video of a real dog, lo
 7. **Compare** — knee, hock and hip angles against clinical measurements (Chayatup et al., *Vet J* 313, 2025)
 8. **Render** — skin + skeleton comparison videos per grade
 
-<div align="center">
-<img src="docs/readme/grades_skeleton.gif" width="760" alt="Skeleton gait across grades" />
-<br><sub>Healthy · Grade 2 · Grade 3 · Grade 4</sub>
-</div>
+<table>
+<tr><th align="center">한국어</th><th align="center">English</th></tr>
+<tr><td><img src="docs/readme/ko/grades_skeleton.gif" width="440" /></td><td><img src="docs/readme/en/grades_skeleton.gif" width="440" /></td></tr>
+<tr><td align="center"><sub>뼈대로 본 등급별 걸음: 정상 · 2기 · 3기 (최종 모델)</sub></td><td align="center"><sub>Skeleton gait across grades: Normal · Grade 2 · Grade 3 (final model)</sub></td></tr>
+</table>
 
 ## Results
 
-<img src="docs/readme/final_grades_leo.png" alt="Simulated vs clinical joint angles by grade" />
+<table>
+<tr><th align="center">한국어</th><th align="center">English</th></tr>
+<tr><td><img src="docs/readme/ko/final_grades.png" width="440" /></td><td><img src="docs/readme/en/final_grades.png" width="440" /></td></tr>
+<tr><td align="center"><sub>등급별 모델과 임상 실측의 관절 각도(시드 3개 평균, 검은색 = 임상 실측)</sub></td><td align="center"><sub>Simulated vs. clinical joint angles by grade (mean of 3 seeds; black = clinical)</sub></td></tr>
+</table>
 
 - **Knee** — the Grade III knee angle lands in the clinical range **only under H2** (keep healthy excursions).
 - **Hock** — clinical dogs increase hock motion with grade; **no hypothesis and no model variant reproduced it.**
@@ -76,10 +84,11 @@ The thesis then uses the model the other way round: **compare a walking video of
 - **Result on 5 test clips** — model only: per-class hit rate normal 0.40 / Grade 2 0.60 / Grade 3 1.00; **mild (normal–Grade 2) vs. severe (Grade ≥ 3): 0.87**, 1.00 when healthy baseline clips of the same dog are added.
 - **Limits** — normal and Grade 2 cannot be separated; severe and Grade 2 cases were tested only semi-synthetically (the model's change added to real healthy video); one normal clip (IMG_7725) was called abnormal by the model-only judge and normal with the baseline. Grades 1, 2 and 4 are interpolated, not measured.
 
-<div align="center">
-<img src="results/figures/thesis_final/Fig15_judge_summary.png" width="560" alt="Mean knee angle of the test clips against the model's grade predictions" />
-<br><sub>Mean knee angle of 5 test clips (dots) and the model's predictions for normal, Grade 2 and Grade 3</sub>
-</div>
+<table>
+<tr><th align="center">한국어</th><th align="center">English</th></tr>
+<tr><td><img src="docs/readme/ko/judge_summary.png" width="440" /></td><td><img src="docs/readme/en/judge_summary.png" width="440" /></td></tr>
+<tr><td align="center"><sub>판정 검사 영상 5구간의 평균 무릎 각도(점)와 모델의 정상, 2기, 3기 예측(점선)</sub></td><td align="center"><sub>Mean knee angle of the 5 test clips (dots) and the model's predictions for normal, Grade 2 and Grade 3 (dashed)</sub></td></tr>
+</table>
 
 ## Figures and videos for presenting
 

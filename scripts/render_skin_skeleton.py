@@ -6,7 +6,7 @@ from sim.config import ROOT, load_yaml
 from sim.dog_scale import apply_leo
 from sim.gait import GaitSpec, TrotController
 from sim.rollout import Sim
-ap = argparse.ArgumentParser(); ap.add_argument("run"); ap.add_argument("out"); ap.add_argument("--seconds", type=float, default=12.0); ap.add_argument("--fps", type=int, default=60)
+ap = argparse.ArgumentParser(); ap.add_argument("run"); ap.add_argument("out"); ap.add_argument("--seconds", type=float, default=12.0); ap.add_argument("--fps", type=int, default=60); ap.add_argument("--lang", default="ko")
 a = ap.parse_args(); imp = load_yaml("configs/impairment/patella.yaml")
 if a.run == "stand":
     cfg = apply_leo(load_yaml("configs/gait/trot.yaml")); z = None
@@ -26,7 +26,7 @@ def shot(label_t=None):
     cam.lookat[:] = [d.xpos[sim.torso][0], d.xpos[sim.torso][1], 0.18]; tiles = []
     for o in (o_skin, o_bone):
         r.update_scene(d, camera=cam, scene_option=o); tiles.append(r.render().copy())
-    im = Image.fromarray(np.hstack(tiles)); dr = ImageDraw.Draw(im); dr.text((8, 6), "피부", font=font, fill=(255, 255, 0)); dr.text((W + 8, 6), "뼈대", font=font, fill=(255, 255, 0))
+    im = Image.fromarray(np.hstack(tiles)); dr = ImageDraw.Draw(im); dr.text((8, 6), "피부" if a.lang == "ko" else "Skin", font=font, fill=(255, 255, 0)); dr.text((W + 8, 6), "뼈대" if a.lang == "ko" else "Skeleton", font=font, fill=(255, 255, 0))
     if label_t is not None: dr.text((1100, 6), f"{label_t:4.1f} s", font=font, fill=(255, 255, 255))
     return np.array(im)
 if z is None:

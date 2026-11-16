@@ -10,7 +10,7 @@ Undergraduate thesis · CUCG Lab, The Catholic University of Korea · 2026
 
 <sub>Left: healthy model fitted to Leo · Right: same body with a Grade III knee-extension limit</sub>
 
-[Project page](https://wri0raan.github.io/JURAN/research/gait.html) · [Portfolio](https://wri0raan.github.io/JURAN/)
+[Project page](https://wri0raan.github.io/JURAN/research/gait.html) · [Portfolio](https://wri0raan.github.io/JURAN/) · [Figures and videos for presenting](docs/PRESENTATION.md)
 
 </div>
 

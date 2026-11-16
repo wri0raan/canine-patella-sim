@@ -70,14 +70,14 @@ A mismatch with clinical data is treated as a result, not a failure.
 
 The thesis then uses the model the other way round: **compare a walking video of the dog with the physics-model dog and judge the knee status.**
 
-- **Final model (fitR3)** — refit with clinical joint-window targets; speed (0.80 m/s) and stride frequency (2.2 Hz) come from video only. Its knee range of motion (38°) and speed (0.69 m/s) are still smaller than the video (about 54–56°, 0.8 m/s); this is kept as a limitation.
+- **Final model (fitR3)** — refit with clinical joint-window targets; speed (0.80 m/s) and stride frequency (2.2 Hz) come from video only. Its knee range of motion (38°) and speed (0.69 m/s) are still smaller than the video (about 53–56°, 0.8 m/s); this is kept as a limitation.
 - **Model prediction** — mean knee angle: normal 125.4°, Grade 2 −6.3°, Grade 3 −21.9° (H2, functional limit).
 - **Judge** — the knee angle measured in the video (same landmark definition as the model; the rump point comes from a radiograph) is compared with the model's per-grade prediction.
 - **Result on 5 test clips** — model only: per-class hit rate normal 0.40 / Grade 2 0.60 / Grade 3 1.00; **mild (normal–Grade 2) vs. severe (Grade ≥ 3): 0.87**, 1.00 when healthy baseline clips of the same dog are added.
-- **Limits** — normal and Grade 2 cannot be separated; severe cases were tested only semi-synthetically (the model's change added to real healthy video); one normal clip (IMG_7725) was called abnormal by the model-only judge and normal with the baseline. Grades 1, 2 and 4 are interpolated, not measured.
+- **Limits** — normal and Grade 2 cannot be separated; severe and Grade 2 cases were tested only semi-synthetically (the model's change added to real healthy video); one normal clip (IMG_7725) was called abnormal by the model-only judge and normal with the baseline. Grades 1, 2 and 4 are interpolated, not measured.
 
 <div align="center">
-<img src="results/figures/thesis/F27_judge_summary_ko.png" width="560" alt="Mean knee angle of the test clips against the model's grade predictions" />
+<img src="results/figures/thesis_final/Fig15_judge_summary.png" width="560" alt="Mean knee angle of the test clips against the model's grade predictions" />
 <br><sub>Mean knee angle of 5 test clips (dots) and the model's predictions for normal, Grade 2 and Grade 3</sub>
 </div>
 
@@ -93,7 +93,8 @@ git clone https://github.com/wri0raan/canine-patella-sim
 |---|---|
 | **Gallery with captions and a suggested order** | **[docs/PRESENTATION.md](docs/PRESENTATION.md)** |
 | Simulation videos (54, all playable) | `results/videos/` |
-| Thesis figures | `results/figures/thesis/` |
+| Final thesis figures 1–21 | `results/figures/thesis_final/` |
+| Earlier thesis figures | `results/figures/thesis/` |
 | Other result figures | `results/figures/` |
 | Result tables | `results/*.csv`, `results/*.json` |
 

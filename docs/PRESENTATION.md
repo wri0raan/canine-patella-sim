@@ -45,45 +45,31 @@ git clone https://github.com/wri0raan/canine-patella-sim
 
 [LEO3_analysis_n1](../results/videos/LEO3_analysis_n1.mp4) · [n2](../results/videos/LEO3_analysis_n2.mp4) · [n3](../results/videos/LEO3_analysis_n3.mp4) · [n4](../results/videos/LEO3_analysis_n4.mp4) · [n5](../results/videos/LEO3_analysis_n5.mp4) (추적선과 판정을 입힌 새 영상 5개) · [L1_leo_analysis_overlay](../results/videos/L1_leo_analysis_overlay.mp4)
 
-## 6. 논문 그림
+## 6. 논문 최종본(v30) 그림 1~21
 
-### 연구 흐름과 추적
-![연구의 전체 과정](../results/figures/thesis/F01_pipeline.png)
-![좌우 다리 이름 뒤바뀜과 이어 붙이기](../results/figures/thesis/F02_identity_fix_large.png)
-![보호자가 직접 표시한 점의 예](../results/figures/thesis/F03_marks_examples.png)
-![표시한 점에 대한 추적 오차](../results/figures/thesis/F04_tracking_error.png)
-![추적한 각도와 표시한 점의 각도](../results/figures/thesis/F05_track_vs_marked_angle.png)
-![엉덩이 기준점의 정의와 평균 무릎 각도](../results/figures/thesis/F07_rump_definition.png)
+논문 최종본에 실린 그림을 번호 순서대로 모았습니다(`results/figures/thesis_final/`). 캡션은 첫 문장만 적었고, 전체 설명은 논문을 보시면 됩니다. 그림 10은 방사선 사진이 들어 있습니다.
 
-### 임상 기준과 모델
-![임상 무릎 각도](../results/figures/thesis/F23_clinical_angles.png)
-![기계적 한계와 기능적 한계](../results/figures/thesis/F22_limits.png)
-![뼈대와 피부 모델](../results/figures/thesis/F26_skeleton_skin.png)
-![등급별 무릎 각도 범위, 비절과 고관절 가동범위](../results/figures/thesis/F25_grades_ko.png)
-![모델이 만든 정상, 2기, 3기 걸음의 무릎 각도](../results/figures/thesis/F09_model_grades.png)
-![모델의 정상, 2기, 3기 걸음 장면](../results/figures/thesis/F10_model_snapshots.png)
-
-### 보더콜리 최종 모델
-![보더콜리 최종 모델 장면](../results/figures/thesis/F17_bc_snapshots.png)
-![보더콜리 모델 위의 뒷다리 뼈 도식](../results/figures/thesis/F20_bc_bones.png)
-![한 걸음 안의 무릎 각도](../results/figures/thesis/F21_bc_grades_strip.png)
-
-### 방사선 사진 (소유자 본인 촬영, 사용자 동의로 공개)
-![방사선 기준점 오프셋: 뒤꿈치뼈 끝, 무릎뼈 앞면](../results/figures/thesis/F06_xray_offsets.png)
-![정면 방사선 사진 위의 뼈 이름 도식](../results/figures/thesis/F18_xray_VD_bones.png)
-![측면 방사선 사진 위의 뼈 이름, 관절 중심, 무릎 각도의 정의](../results/figures/thesis/F19_xray_lateral_bones.png)
-![방사선 사진 위의 고관절, 무릎, 비절 각도](../results/figures/thesis/F24_xray_angles.png)
-
-### 판정
-![판정 검사 영상 5구간의 평균 무릎 각도와 모델의 등급별 예측](../results/figures/thesis/F27_judge_summary_ko.png)
-![판정 영상의 한 장면](../results/figures/thesis/F28_judge_frame_ko.png)
-
-### 판정에 쓴 영상의 장면
-![IMG_7726 구간 a](../results/figures/thesis/F11_scenes_a.png)
-![IMG_7726 구간 b](../results/figures/thesis/F12_scenes_b.png)
-![이전 촬영 구간 1](../results/figures/thesis/F13_scenes_l2a.png)
-![이전 촬영 구간 2](../results/figures/thesis/F14_scenes_l2b.png)
-![IMG_7725](../results/figures/thesis/F15_scenes_t7725.png)
+![그림 1. 연구의 전체 과정.](../results/figures/thesis_final/Fig01_overview.png)
+![그림 2. 임상 논문이 측정한 세 관절(고관절, 무릎, 비절)의 각도 위치.](../results/figures/thesis_final/Fig02_clinical_joint_angles.png)
+![그림 3. 무릎 신전 한계.](../results/figures/thesis_final/Fig03_knee_extension_limits.png)
+![그림 4. 등급별 무릎 각도 범위(a), 비절 가동범위(b), 고관절 가동범위(c).](../results/figures/thesis_final/Fig04_grades_knee_hock_hip.png)
+![그림 5. (a) 물리 모델의 뼈대, (b) 같은 모델에 피부를 입힌 모습.](../results/figures/thesis_final/Fig05_skeleton_and_skin.png)
+![그림 6. 두 뒷다리의 좌우 이름 뒤바뀜과 동적 계획법에 의한 이어 붙이기(구간 a, 프레임 205, 222, 240, 258).](../results/figures/thesis_final/Fig06_leg_identity_fix.png)
+![그림 7. 직접 표시한 점의 예(보정용 구간 a 두 장, 시험용 구간 b 두 장).](../results/figures/thesis_final/Fig07_hand_marked_points.png)
+![그림 8. 표시한 점에 대한 추적의 위치 오차(시험용 구간 b, 중앙값, 정강이 길이의 %).](../results/figures/thesis_final/Fig08_tracking_error.png)
+![그림 9. 추적한 각도와 표시한 점(관절 중심으로 환산)의 각도.](../results/figures/thesis_final/Fig09_tracked_vs_marked_angle.png)
+![그림 10. Raeo 방사선 사진(왼쪽과 오른쪽 뒷다리 측면)에서 읽은 피부 표식과 관절 중심의 차이.](../results/figures/thesis_final/Fig10_radiograph_offsets.png)
+![그림 11. 엉덩이 표식을 꼬리 쪽으로 옮겼을 때 모델의 무릎 각도 평균(왼쪽)과 정상 대비 변화(오른쪽).](../results/figures/thesis_final/Fig11_rump_marker_sensitivity.png)
+![그림 12. 엉덩이 기준점의 정의와 정상 걸음의 평균 무릎 각도.](../results/figures/thesis_final/Fig12_rump_definition.png)
+![그림 13. 정상 걸음의 관절 각도 가동범위.](../results/figures/thesis_final/Fig13_rom_refit.png)
+![그림 14. 모델(fitR3)이 만든 정상, 2기, 3기 걸음의 무릎 각도(방사선 기준점, 14초 중 2~6초).](../results/figures/thesis_final/Fig14_model_grades_knee_angle.png)
+![그림 15. 판정 검사 영상 5구간의 평균 무릎 각도(점)와 모델의 등급별 예측(점선), 판정 폭(띠, ±6.1도).](../results/figures/thesis_final/Fig15_judge_summary.png)
+![그림 16. 판정 영상의 한 장면(검사 영상 5).](../results/figures/thesis_final/Fig16_judge_video_frame.png)
+![그림 17. 검사 영상 1.](../results/figures/thesis_final/Fig17_test_clip_1.png)
+![그림 18. 검사 영상 2.](../results/figures/thesis_final/Fig18_test_clip_2.png)
+![그림 19. 검사 영상 3.](../results/figures/thesis_final/Fig19_test_clip_3.png)
+![그림 20. 검사 영상 4.](../results/figures/thesis_final/Fig20_test_clip_4.png)
+![그림 21. 검사 영상 5.](../results/figures/thesis_final/Fig21_test_clip_5.png)
 
 ## 7. 그 밖의 결과 그림
 
@@ -96,9 +82,11 @@ git clone https://github.com/wri0raan/canine-patella-sim
 
 ## 8. 한계 (발표 때 말할 점)
 
+- 한 마리의 개와 가상의 비정상 사례에 근거한 가능성의 확인이며 진단을 대신하지 않습니다.
 - 임상 실측은 정상과 3기뿐이고 1, 2, 4기는 추정 입력입니다.
-- 모델 무릎 가동범위(38도)와 속도(0.69 m/s)는 영상(약 54~56도, 0.8 m/s)보다 작습니다.
-- 정상과 2기는 가르지 못하고, 경증(정상~2기) 대 중증(3기 이상)만 구분합니다.
-- 중증 판정은 모델 변화량을 영상에 더한 준합성 검사입니다.
+- 모델의 무릎 움직임 폭(38도)은 영상(약 53~56도)보다 작고, 속도도 0.69 m/s로 목표 0.80 m/s에 못 미쳤습니다.
+- 정상과 2기는 가르지 못하고, 경증(정상~2기) 대 중증(3기 이상)만 구분합니다(0.87, 정상 기준 영상을 함께 쓰면 1.00).
+- 중증은 정상 영상에 모델의 변화량을 더한 가상 사례로 시험했습니다.
+- 속도, 걸음 주기, 보폭만으로는 무릎 상태를 식별할 수 없었고, 근력과 체중도 식별되지 않았습니다.
 - 뼈 이름 도식은 눈으로 읽은 모식도라 수의사 확인을 권장합니다.
 - 원본 촬영 영상과 방사선 원본 파일은 공개 저장소에 올리지 않았습니다.

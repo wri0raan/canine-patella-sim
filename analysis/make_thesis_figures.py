@@ -70,7 +70,7 @@ if on("F03"):
             if not v: continue
             X, Y = (v[0] - m["x0"]) * m["z"], (v[1] - m["y0"]) * m["z"]; col = "#2ca02c" if k in ("tail", "hip") else ("#d62728" if k.startswith("n") else "#1f77b4")
             a_.plot(X, Y, "o", mfc="none", mec=col, ms=9, mew=2); a_.text(X + 8, Y - 8, names[k], color="white", fontsize=7.5, bbox=dict(fc=col, ec="none", pad=1))
-        a_.set_title(f"{'학습용 클립 a' if i[0] == 'a' else '시험용 클립 b'}, 프레임 {i[2:]}", fontsize=10)
+        a_.set_title(f"{'보정용 구간 a' if i[0] == 'a' else '시험용 구간 b'}, 프레임 {i[2:]}", fontsize=10)
     plt.tight_layout(); plt.savefig(f"{OUT}/F03_marks_examples.png", dpi=150); plt.close(); print("F03")
 
 if on("F04"):
@@ -80,16 +80,16 @@ if on("F04"):
     for k, (m, lab, col) in enumerate((("hrnet_w32", "hrnet_w32", "#9ecae1"), ("resnet_50", "resnet_50", "#6baed6"), ("fused", "합친 추적", "#08519c"))):
         v = G[m].values; ax.bar(np.arange(3) + (k - 1) * w, v, w, label=lab, color=col)
         for i, t in enumerate(v): ax.text(i + (k - 1) * w, t + 1, f"{t:.0f}", ha="center", fontsize=8)
-    ax.set_xticks(range(3)); ax.set_xticklabels(["발", "뒤꿈치", "무릎"]); ax.set_ylabel("위치 오차 (정강이 길이의 %)"); ax.set_title("표시한 점 대비 추적 오차 (시험용 클립 b, 중앙값)"); ax.legend(); plt.tight_layout(); plt.savefig(f"{OUT}/F04_tracking_error.png", dpi=150); plt.close(); print("F04")
+    ax.set_xticks(range(3)); ax.set_xticklabels(["발", "뒤꿈치", "무릎"]); ax.set_ylabel("위치 오차 (정강이 길이의 %)"); ax.set_title("표시한 점 대비 추적 오차 (시험용 구간 b, 중앙값)"); ax.legend(); plt.tight_layout(); plt.savefig(f"{OUT}/F04_tracking_error.png", dpi=150); plt.close(); print("F04")
 
 if on("F05"):
     A = pd.read_csv("results/ident_results/V_convert_angles.csv"); A = A[A.model == "fused"]
     fig, axs = plt.subplots(1, 2, figsize=(10, 4.4))
     for a_, (j, nm) in zip(axs, (("stif", "무릎"), ("hock", "뒤꿈치(비절)"))):
-        for cl, col, lab in (("a", "#bbbbbb", "클립 a (학습용)"), ("b", "#d62728", "클립 b (시험용)")):
+        for cl, col, lab in (("a", "#bbbbbb", "구간 a (보정용)"), ("b", "#d62728", "구간 b (시험용)")):
             g = A[A["clip"] == cl]; a_.scatter(g[f"truth_{j}_conv"], g[f"track_{j}"], s=22, color=col, label=lab)
         gb = A[A["clip"] == "b"]; r = np.corrcoef(gb[f"track_{j}"], gb[f"truth_{j}_conv"])[0, 1]; lo, hi = 60, 180; a_.plot([lo, hi], [lo, hi], "k--", lw=0.8); a_.set_xlim(lo, hi); a_.set_ylim(lo, hi)
-        a_.set_xlabel(f"표시한 점(관절 중심 환산)의 {nm} 각도 (도)"); a_.set_ylabel("추적한 각도 (도)"); a_.set_title(f"{nm}: 시험용 클립 b 상관 {r:.2f}"); a_.legend(fontsize=8)
+        a_.set_xlabel(f"표시한 점(관절 중심 환산)의 {nm} 각도 (도)"); a_.set_ylabel("추적한 각도 (도)"); a_.set_title(f"{nm}: 시험용 구간 b 상관 {r:.2f}"); a_.legend(fontsize=8)
     plt.tight_layout(); plt.savefig(f"{OUT}/F05_track_vs_marked_angle.png", dpi=150); plt.close(); print("F05")
 
 if on("F06"):
@@ -114,9 +114,10 @@ if on("F07"):
     vid = W[W.source.str.startswith("video") & (W.rump == "tail_est(c_fit)")]; vb = W[W.source.str.startswith("video") & (W.rump == "back_end")]
     labs.append("영상\n(back_end 그대로)"); vals.append(float(vb.stif_mean.mean())); cols.append("#fdd0a2"); labs.append("영상\n(꼬리 뿌리 추정)"); vals.append(float(vid.stif_mean.mean())); cols.append("#f08a24")
     ax.bar(labs, vals, color=cols, width=0.6)
-    for i, v in enumerate(vals): ax.text(i, v + 1.5, f"{v:.0f}", ha="center", fontsize=10)
+    tops = {2: float(vb.stif_mean.max()), 3: float(vid.stif_mean.max())}
+    for i, v in enumerate(vals): ax.text(i, max(v, tops.get(i, v)) + 1.8, f"{v:.0f}", ha="center", fontsize=11)
     ax.errorbar([3], [vid.stif_mean.mean()], yerr=[[vid.stif_mean.mean() - vid.stif_mean.min()], [vid.stif_mean.max() - vid.stif_mean.mean()]], color="k", capsize=5); ax.errorbar([2], [vb.stif_mean.mean()], yerr=[[vb.stif_mean.mean() - vb.stif_mean.min()], [vb.stif_mean.max() - vb.stif_mean.mean()]], color="k", capsize=5)
-    ax.set_ylim(80, 175); ax.set_ylabel("정상 걸음의 무릎 각도 평균 (도)"); ax.set_title("엉덩이 기준점의 정의를 맞추면 모델과 영상의 평균 무릎 각도가 가까워진다 (막대 선: 영상 다리·클립의 범위)"); ax.title.set_fontsize(10); plt.tight_layout(); plt.savefig(f"{OUT}/F07_rump_definition.png", dpi=150); plt.close(); print("F07")
+    ax.set_ylim(80, 175); ax.set_ylabel("정상 걸음의 무릎 각도 평균 (도)"); ax.set_title("엉덩이 기준점의 정의를 맞추면 모델과 영상의 평균 무릎 각도가 가까워진다 (막대 선: 구간 a, b 두 다리의 범위)"); ax.title.set_fontsize(10); plt.tight_layout(); plt.savefig(f"{OUT}/F07_rump_definition.png", dpi=150); plt.close(); print("F07")
 
 if on("F08"):
     tags = ["a", "b", "l2a", "l2b", "t7725"]; lab = {"a": "클립 a", "b": "클립 b", "l2a": "이전 촬영 1", "l2b": "이전 촬영 2", "t7725": "IMG_7725"}

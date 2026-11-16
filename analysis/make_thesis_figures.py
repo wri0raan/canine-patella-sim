@@ -27,20 +27,20 @@ def to_crop(p, cg, i):
 
 
 if on("F01"):
-    fig, ax = plt.subplots(figsize=(12, 5.2)); ax.axis("off"); ax.set_xlim(0, 12); ax.set_ylim(0, 5.2)
+    fig, ax = plt.subplots(figsize=(11, 4.2)); ax.axis("off"); ax.set_xlim(0, 12.6); ax.set_ylim(0, 4.2)
     def box(x, y, w, h, t, fc):
-        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.04", fc=fc, ec="#444", lw=1)); ax.text(x + w / 2, y + h / 2, t, ha="center", va="center", fontsize=9.5)
-    def arr(a, b): ax.add_patch(FancyArrowPatch(a, b, arrowstyle="-|>", mutation_scale=14, color="#444", lw=1.2))
-    ax.text(0.1, 4.95, "A. 영상 쪽 (보호자 걷기 영상)", fontsize=11, fontweight="bold", color="#1f4e79"); ax.text(0.1, 2.45, "B. 모델 쪽 (물리 시뮬레이션 개)", fontsize=11, fontweight="bold", color="#7a3e00")
-    A = [("옆모습 걷기 영상\n(4K, 120 fps)", 0.1), ("개를 따라가는\n원본 해상도 잘라내기", 2.0), ("관절 추적\n(두 포즈 모델)", 3.9), ("좌우 다리\n이어 붙이기·합치기", 5.8), ("관절 각도\n(무릎, 비절)", 7.7), ("방사선 기준\n표식 정의 맞춤", 9.6)]
-    for t, x in A: box(x, 3.7, 1.7, 1.0, t, "#dcebf8")
-    for i in range(5): arr((A[i][1] + 1.72, 4.2), (A[i + 1][1] - 0.02, 4.2))
-    Bx = [("X-ray로 형태 검증\n(뼈 길이 비, 기준점)", 0.1), ("물리 모델 개 leo\n(MuJoCo, 7 kg)", 2.0), ("정상 걸음 최적화\n(임상 관절 범위 목표)", 3.9), ("등급별 무릎 한계\n(등급 2, 3)", 5.8), ("등급별 무릎 각도\n예측 평균", 7.7)]
-    for t, x in Bx: box(x, 1.2, 1.7, 1.0, t, "#fbe5d0")
-    for i in range(4): arr((Bx[i][1] + 1.72, 1.7), (Bx[i + 1][1] - 0.02, 1.7))
-    box(9.6, 2.35, 2.2, 1.0, "비교와 판정\n(경증 / 중증)", "#e2f0d9"); arr((10.5, 3.68), (10.7, 3.37)); arr((9.42, 1.7), (10.2, 2.33))
-    ax.text(6.0, 0.55, "같은 정의로 맞춘 무릎 각도 평균을 모델의 등급별 예측과 비교한다", ha="center", fontsize=10, style="italic")
-    plt.tight_layout(); plt.savefig(f"{OUT}/F01_pipeline.png", dpi=160); plt.close(); print("F01")
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.05", fc=fc, ec="#444", lw=1.2)); ax.text(x + w / 2, y + h / 2, t, ha="center", va="center", fontsize=12)
+    def arr(a, b): ax.add_patch(FancyArrowPatch(a, b, arrowstyle="-|>", mutation_scale=16, color="#444", lw=1.5))
+    ax.text(0.2, 3.95, "영상", fontsize=13, fontweight="bold", color="#1f4e79"); ax.text(0.2, 1.62, "모델", fontsize=13, fontweight="bold", color="#7a3e00")
+    A = [("걷기 영상\n(옆모습)", 0.2), ("관절 추적\n(무릎 각도 추출)", 3.3), ("영상의\n무릎 각도", 6.4)]
+    for t, x in A: box(x, 2.65, 2.5, 1.05, t, "#dcebf8")
+    for i in range(2): arr((A[i][1] + 2.58, 3.17), (A[i + 1][1] - 0.08, 3.17))
+    Bx = [("영상과 X-ray로\n물리 모델 제작", 0.2), ("정상·등급별\n걸음 합성", 3.3), ("모델의 등급별\n무릎 각도 예측", 6.4)]
+    for t, x in Bx: box(x, 0.35, 2.5, 1.05, t, "#fbe5d0")
+    for i in range(2): arr((Bx[i][1] + 2.58, 0.87), (Bx[i + 1][1] - 0.08, 0.87))
+    box(9.9, 1.5, 2.5, 1.2, "같은 정의로 비교\n경증 / 중증 구분", "#e2f0d9")
+    arr((8.98, 3.0), (10.6, 2.78)); arr((8.98, 1.05), (10.6, 1.42))
+    plt.tight_layout(); plt.savefig(f"{OUT}/F01_pipeline.png", dpi=200); plt.close(); print("F01")
 
 if on("F02"):
     cg, fz, ix = tracks("a"); z = np.load("data/real/leo5/work/hrnet_w32/a_kp.npz"); zi = {n: i for i, n in enumerate(z["names"])}; idxs = [205, 222, 240, 258]

@@ -25,7 +25,7 @@ label(ax, (1245, 1710), "비골 (종아리뼈)", (1480, 1830), COL["tibia"], 9);
 label(ax, (880, 1200), "꼬리뼈 (미추)", (1010, 1260), COL["spine"], 9)
 ax.annotate("", xy=(745, 1345), xytext=(585, 1345), arrowprops=dict(arrowstyle="-|>", color="white", lw=3)); ax.text(665, 1305, "내측 탈구 방향\n(몸 중심 쪽)", color="white", fontsize=9, ha="center", fontweight="bold", bbox=dict(fc="black", ec="none", alpha=0.6, pad=2))
 ax.plot([735, 555], [820, 1430], "--", color="white", lw=1.4); ax.plot([545, 590], [1470, 1850], "--", color="white", lw=1.4); ax.text(470, 1000, "대퇴골 축", color="white", fontsize=9, rotation=75); ax.text(615, 1600, "경골 축", color="white", fontsize=9, rotation=84)
-ax.set_title("leo 골반과 뒷다리 방사선 사진(정면, 배-등 방향)의 뼈 이름 도식", fontsize=12)
+ax.set_title("Raeo 골반과 뒷다리 방사선 사진(정면, 배-등 방향)의 뼈 이름 도식", fontsize=12)
 plt.tight_layout(); plt.savefig(f"{OUT}/F18_xray_VD_bones.png", dpi=150); plt.close(); print("F18")
 
 im4 = Image.open("data/real/leo_xray/xr4.jpg").convert("RGB"); H = {"hip": (1244, 585), "stifle": (927, 1256), "plateau": (945, 1343), "hock": (1343, 2071), "tip": (1425, 1965), "pat": (806, 1200)}
@@ -41,4 +41,4 @@ v1 = np.array(H["hip"]) - np.array(H["stifle"]); v2 = np.array(H["hock"]) - np.a
 from matplotlib.patches import Arc
 ax.add_patch(Arc(H["stifle"], 330, 330, theta1=min(a1, a2), theta2=max(a1, a2), color="yellow", lw=3)); ax.text(H["stifle"][0] + 230, H["stifle"][1] + 40, f"무릎 사이각\n약 {ang:.0f}도\n(이 자세의 값)", color="yellow", fontsize=10, fontweight="bold")
 ax.text(60, 2400, "무릎 각도 = 엉덩이 기준점-무릎-비절 사이각 (영상), 대퇴골-경골 사이각 (모델의 관절각)", color="white", fontsize=9, bbox=dict(fc="black", ec="none", alpha=0.6))
-ax.set_title("leo 뒷다리 방사선 사진(측면)의 뼈 이름과 관절 중심, 무릎 각도의 정의", fontsize=12); plt.tight_layout(); plt.savefig(f"{OUT}/F19_xray_lateral_bones.png", dpi=150); plt.close(); print("F19")
+ax.set_title("Raeo 뒷다리 방사선 사진(측면)의 뼈 이름과 관절 중심, 무릎 각도의 정의", fontsize=12); plt.tight_layout(); plt.savefig(f"{OUT}/F19_xray_lateral_bones.png", dpi=150); plt.close(); print("F19")

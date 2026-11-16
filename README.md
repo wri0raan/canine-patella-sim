@@ -66,6 +66,41 @@ This project tests it in physics: build a dog model from video of a real dog, lo
 
 A mismatch with clinical data is treated as a result, not a failure.
 
+### Final model and knee-status judge
+
+The thesis then uses the model the other way round: **compare a walking video of the dog with the physics-model dog and judge the knee status.**
+
+- **Final model (fitR3)** — refit with clinical joint-window targets; speed (0.80 m/s) and stride frequency (2.2 Hz) come from video only. Its knee range of motion (38°) and speed (0.69 m/s) are still smaller than the video (about 54–56°, 0.8 m/s); this is kept as a limitation.
+- **Model prediction** — mean knee angle: normal 125.4°, Grade 2 −6.3°, Grade 3 −21.9° (H2, functional limit).
+- **Judge** — the knee angle measured in the video (same landmark definition as the model; the rump point comes from a radiograph) is compared with the model's per-grade prediction.
+- **Result on 5 test clips** — model only: per-class hit rate normal 0.40 / Grade 2 0.60 / Grade 3 1.00; **mild (normal–Grade 2) vs. severe (Grade ≥ 3): 0.87**, 1.00 when healthy baseline clips of the same dog are added.
+- **Limits** — normal and Grade 2 cannot be separated; severe cases were tested only semi-synthetically (the model's change added to real healthy video); one normal clip (IMG_7725) was called abnormal by the model-only judge and normal with the baseline. Grades 1, 2 and 4 are interpolated, not measured.
+
+<div align="center">
+<img src="results/figures/thesis/F27_judge_summary_ko.png" width="560" alt="Mean knee angle of the test clips against the model's grade predictions" />
+<br><sub>Mean knee angle of 5 test clips (dots) and the model's predictions for normal, Grade 2 and Grade 3</sub>
+</div>
+
+## Figures and videos for presenting
+
+Everything needed to present from another PC is in the repository: clone it and open the files, or open the links on GitHub when online (about 180 MB).
+
+```bash
+git clone https://github.com/wri0raan/canine-patella-sim
+```
+
+| What | Where |
+|---|---|
+| **Gallery with captions and a suggested order** | **[docs/PRESENTATION.md](docs/PRESENTATION.md)** |
+| Simulation videos (54, all playable) | `results/videos/` |
+| Thesis figures | `results/figures/thesis/` |
+| Other result figures | `results/figures/` |
+| Result tables | `results/*.csv`, `results/*.json` |
+
+Key videos: [final model, Border Collie skin](results/videos/BC_final_model_grades.mp4) · [same gait, white skin](results/videos/MODEL_grades_fitR3.mp4) · [skeleton by grade](results/videos/Q_grades_H2_skeleton.mp4) · [judge on IMG_7725](results/videos/JUDGE_IMG7725.mp4)
+
+The Border Collie skin is a visualisation of the same gait on another breed's appearance, not Leo's look.
+
 ## Next
 
 Turn this into a tool that builds a per-dog physics model from video:
@@ -78,7 +113,8 @@ sim/        MuJoCo / dm_control dog: scaling, gait, impairment, rollout
 configs/    gait, impairment (patella.yaml) and model (leo.yaml) settings — no magic numbers in code
 scripts/    pose extraction, optimization runners (run_*.sh), rendering
 analysis/   metrics shared by sim and video, figures, clinical comparison
-docs/       PIPELINE.md (step-by-step reproduction), research notes
+docs/       PIPELINE.md (step-by-step reproduction), PRESENTATION.md (figures and videos), research notes
+results/    figures/ (incl. thesis/), videos/, result tables (csv, json)
 ```
 
 ## Reproduce
@@ -95,7 +131,9 @@ python analysis/final_results.py --leo --prefix s   # tables and figures
 
 ## Data
 
-Leo's videos and X-rays are not included. Reference videos of other dogs were used for qualitative comparison only and are not redistributed.
+Leo's raw videos and the original radiograph files are not included; a few figures made from Leo's own radiographs (landmark offsets, bone-name diagrams) are. The thesis text is not included. Reference videos of other dogs were used for qualitative comparison only and are not redistributed.
+
+Because the raw data and earlier run folders are not in the repository, the tracking and judging stages and the grade sweeps cannot be rerun from a fresh clone; the figures, videos, tables and code are provided for inspection and presentation.
 Clinical values come from Chayatup, Wangdee & Soontornvipart, *The Veterinary Journal* 313 (2025) 106369 — only Grade 0 and Grade III are measured there; other grades are interpolated and labelled as such.
 
 ---

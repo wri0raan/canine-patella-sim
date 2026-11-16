@@ -68,6 +68,12 @@ git clone https://github.com/wri0raan/canine-patella-sim
 ![보더콜리 모델 위의 뒷다리 뼈 도식](../results/figures/thesis/F20_bc_bones.png)
 ![한 걸음 안의 무릎 각도](../results/figures/thesis/F21_bc_grades_strip.png)
 
+### 방사선 사진 (소유자 본인 촬영, 사용자 동의로 공개)
+![방사선 기준점 오프셋: 뒤꿈치뼈 끝, 무릎뼈 앞면](../results/figures/thesis/F06_xray_offsets.png)
+![정면 방사선 사진 위의 뼈 이름 도식](../results/figures/thesis/F18_xray_VD_bones.png)
+![측면 방사선 사진 위의 뼈 이름, 관절 중심, 무릎 각도의 정의](../results/figures/thesis/F19_xray_lateral_bones.png)
+![방사선 사진 위의 고관절, 무릎, 비절 각도](../results/figures/thesis/F24_xray_angles.png)
+
 ### 판정
 ![판정 검사 영상 5구간의 평균 무릎 각도와 모델의 등급별 예측](../results/figures/thesis/F27_judge_summary_ko.png)
 ![판정 영상의 한 장면](../results/figures/thesis/F28_judge_frame_ko.png)
@@ -94,4 +100,5 @@ git clone https://github.com/wri0raan/canine-patella-sim
 - 모델 무릎 가동범위(38도)와 속도(0.69 m/s)는 영상(약 54~56도, 0.8 m/s)보다 작습니다.
 - 정상과 2기는 가르지 못하고, 경증(정상~2기) 대 중증(3기 이상)만 구분합니다.
 - 중증 판정은 모델 변화량을 영상에 더한 준합성 검사입니다.
-- 방사선 사진이 들어간 그림과 원본 촬영 영상은 공개 저장소에 올리지 않았습니다.
+- 뼈 이름 도식은 눈으로 읽은 모식도라 수의사 확인을 권장합니다.
+- 원본 촬영 영상과 방사선 원본 파일은 공개 저장소에 올리지 않았습니다.

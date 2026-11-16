@@ -148,17 +148,17 @@ if on("F10"):
         a_.set_title(f"영상 {t:.1f}초 지점 (왼쪽부터 정상, 등급 2, 등급 3)", fontsize=9)
     plt.tight_layout(); plt.savefig(f"{OUT}/F10_model_snapshots.png", dpi=140); plt.close(); print("F10")
 
-for n, (tag, title, true) in enumerate((("a", "IMG_7726 클립 a (정상)", "정상"), ("b", "IMG_7726 클립 b (정상)", "정상"), ("l2a", "이전 촬영 구간 1 (정상)", "정상"), ("l2b", "이전 촬영 구간 2 (정상)", "정상"), ("t7725", "IMG_7725 (정상)", "정상"))):
+for n, (tag, title, true) in enumerate((("a", "검사 영상 1", "정상"), ("b", "검사 영상 2", "정상"), ("l2a", "검사 영상 3", "정상"), ("l2b", "검사 영상 4", "정상"), ("t7725", "검사 영상 5", "정상"))):
     key = f"F{11 + n}"
     if not on(key): continue
     cg, fz, ix = tracks(tag); ins = np.nonzero(fz["inside"])[0]; a0, b0 = int(ins[0]), int(ins[-1]) + 1
     body = fz["body"][a0:b0]; be, bb = lpv(body[:, ix["back_end"], :2]), lpv(body[:, ix["back_base"], :2]); ub = unit(be - bb)
     legs = {k: np.stack([lpv(fz[k][a0:b0][:, i, :2]) for i in range(3)], 1) for k in ("hindA", "hindB")}; Tv = {k: float(np.median(np.linalg.norm(v[:, 0] - v[:, 1], axis=1))) for k, v in legs.items()}
     rump = {k: be + CR * Tv[k] * ub for k in legs}; A = {k: ang(rump[k], legs[k][:, 0], legs[k][:, 1]) for k in legs}; sel = np.linspace(a0 + 6, b0 - 8, 6).astype(int); x_, win, lg = clip_stifle(tag, CR)
-    fig, axs = plt.subplots(1, 6, figsize=(18, 3.9))
-    for a_, i in zip(axs, sel):
+    fig, axs = plt.subplots(2, 3, figsize=(9, 5.1))
+    for a_, i in zip(axs.flat, sel):
         j = i - a0; im = frame(f"data/real/leo5/work/c{tag}.mp4", i, 1024); a_.imshow(im.crop((60, 260, 960, 960))); a_.axis("off")
         for k, col in (("hindA", "#d62728"), ("hindB", "#1f77b4")):
-            P = [to_crop(rump[k][j], cg, i)] + [to_crop(legs[k][j, q], cg, i) for q in range(3)]; P = np.array(P) - [60, 260]; a_.plot(P[:, 0], P[:, 1], "-o", color=col, lw=2.2, ms=4); a_.text(P[1, 0] + 8, P[1, 1] - 12, f"{A[k][j]:.0f}°", color=col, fontsize=11, fontweight="bold")
-        a_.set_title(f"{(i - a0) / 120:.2f}초", fontsize=9)
-    fig.suptitle(f"{title}: 구간 평균 무릎 각도 {x_:.1f}도 (두 다리 {lg[0]:.1f}, {lg[1]:.1f}), 온전히 보인 구간 {win:.1f}초", fontsize=11); plt.tight_layout(); plt.savefig(f"{OUT}/{key}_scenes_{tag}.png", dpi=110); plt.close(); print(key)
+            P = [to_crop(rump[k][j], cg, i)] + [to_crop(legs[k][j, q], cg, i) for q in range(3)]; P = np.array(P) - [60, 260]; a_.plot(P[:, 0], P[:, 1], "-o", color=col, lw=2.2, ms=4); a_.text(P[1, 0] + 8, P[1, 1] - 12, f"{A[k][j]:.0f}°", color=col, fontsize=13, fontweight="bold")
+        a_.set_title(f"{(i - a0) / 120:.2f}초", fontsize=12)
+    fig.suptitle(f"{title}: 구간 평균 무릎 각도 {x_:.1f}도 (두 다리 {lg[0]:.1f}, {lg[1]:.1f}), 온전히 보인 구간 {win:.1f}초", fontsize=14); plt.tight_layout(); plt.savefig(f"{OUT}/{key}_scenes_{tag}.png", dpi=130, bbox_inches="tight", pad_inches=0.06); plt.close(); print(key)

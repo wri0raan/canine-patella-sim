@@ -74,6 +74,10 @@ This project tests it in physics: build a dog model from video of a real dog, lo
 
 A mismatch with clinical data is treated as a result, not a failure.
 
+<img src="docs/readme/leo-tracking.gif" width="400" /><br>
+<sub>걷기 영상에서 실시간으로 추적한 뒷다리 관절과 무릎 각도 (판정 검사 영상 5, 2배 느리게) · Real-time hind-limb tracking and knee angle on a walking video (test clip 5, 2× slow)</sub>
+
+
 ### Final model and knee-status judge
 
 The thesis then uses the model the other way round: **compare a walking video of the dog with the physics-model dog and judge the knee status.**

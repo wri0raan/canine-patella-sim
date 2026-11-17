@@ -12,9 +12,6 @@ Undergraduate thesis · CUCG Lab, The Catholic University of Korea · 2026
 <tr><td align="center"><sub>왼쪽: leo에 맞춘 정상 모델 · 오른쪽: 같은 몸에 3기 무릎 신전 한계를 건 모델 (최종 모델, 0.5배속)</sub></td><td align="center"><sub>Left: healthy model fitted to Leo · Right: same body with a Grade 3 knee-extension limit (final model, half speed)</sub></td></tr>
 </table>
 
-<img src="docs/readme/leo-tracking.gif" width="400" /><br>
-<sub>걷기 영상에서 실시간으로 추적한 뒷다리 관절과 무릎 각도 (판정 검사 영상 5, 2배 느리게) · Real-time hind-limb tracking and knee angle on a walking video (test clip 5, 2× slow)</sub>
-
 [Project page](https://wri0raan.github.io/JURAN/research/gait.html) · [Portfolio](https://wri0raan.github.io/JURAN/) · [Figures and videos for presenting](docs/PRESENTATION.md)
 
 </div>
